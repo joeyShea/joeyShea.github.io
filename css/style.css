@@ -36,6 +36,16 @@ html {
     background-color: #222;
 }
 
+img, a {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+}
+
 html,
 body {
     height: 100%;

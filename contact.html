@@ -60,7 +60,7 @@
 
           <li><a href="/">Intro</a></li>
           <li><a href="about.html">About me</a></li>
-          <li><a href="/"l">services</a></li>
+          <li><a href="/">services</a></li>
           <li><a href="portfolio.html">portfolio</a></li>
           <li>
             <a href="contact.html">contact me</a>
@@ -94,9 +94,37 @@
     <!-- end top bar -->
 
     <!-- main-container -->
+    <form
+      method="post"
+      action="https://forms.un-static.com/forms/YOUR_ENDPOINT_REFERENCE"
+    >
+      <input type="text" name="name" placeholder="Enter your name" required />
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your e-mail address"
+        required
+      />
+      <textarea name="message" cols="40" rows="15"></textarea>
+
+      <div class="col-md-12">
+        <div class="textarea-contact">
+          <textarea name="message"></textarea>
+          <span>message</span>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <a href="#" class="btn btn-box">Send</a>
+      </div>
+    </form>
+
     <div class="container main-container">
       <div class="col-md-6">
-        <form action="#" method="post">
+        <form
+          action="https://forms.un-static.com/forms/2c308cda02468ccf22cd1ec4a8bdeed4b6145a58"
+          method="post"
+        >
           <div class="row">
             <div class="col-md-6">
               <div class="input-contact">
@@ -106,7 +134,7 @@
             </div>
             <div class="col-md-6">
               <div class="input-contact">
-                <input type="text" name="email" />
+                <input email="text" name="email" />
                 <span>your email</span>
               </div>
             </div>
@@ -142,8 +170,14 @@
           voluptatis aditus
         </p>
         <div class="contact-info">
-          <p><i class="ion-android-call"></i> 0100 787 3456</p>
-          <p><i class="ion-ios-email"></i> box@info.com</p>
+          <p>
+            <i class="ion-android-call" style="transform: translateY(4px)"></i>
+            +1 (785) 844-2569
+          </p>
+          <p>
+            <i class="ion-ios-email" style="transform: translateY(4px)"></i>
+            27josephs@gmail.com
+          </p>
         </div>
       </div>
     </div>
