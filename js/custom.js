@@ -51,6 +51,18 @@ $(window).load(function () {
         }, scroll_top_duration);
     });
 
+    //smooth scroll downwards
+    $('.mouse').on('click', function (event) {
+        event.preventDefault();
+
+        var windowHeight = $(window).height();
+        var targetScrollPosition = $(window).scrollTop() + windowHeight;
+
+        $('body,html').animate({
+            scrollTop: targetScrollPosition,
+        }, scroll_top_duration);
+    });
+
     // input
     $(".input-contact input, .textarea-contact textarea").focus(function () {
         $(this).next("span").addClass("active");
