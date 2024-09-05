@@ -33,7 +33,7 @@
 ==================================================*/
 
 html {
-    background-color: #333;
+    background-color: #222;
 }
 
 html,
@@ -56,6 +56,13 @@ body {
 .no-padding [class^="col-"] {
     padding-left: 0;
     padding-right: 0;
+}
+
+.some-padding {
+    padding: 0px;
+}
+.some-padding [class^="col-"] {
+    padding: 5px;
 }
 
 .main-container {
@@ -234,7 +241,7 @@ h5 {
 
 .box-logo {
     display: block;
-    padding: 20px;
+    padding: 10px;
     background-color: #222;
 }
 
@@ -703,7 +710,7 @@ b i:last-child {
 
 .portfolio .categories-grid .categories ul li {
     list-style: none;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .portfolio .categories-grid .categories ul li a {
