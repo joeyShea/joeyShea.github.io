@@ -34,6 +34,11 @@ html {
   background-color: #222;
 }
 
+.pdfobject-container {
+  height: 1000px;
+  border: 0px solid #ccc;
+}
+
 img,
 a {
   -webkit-user-drag: none;
