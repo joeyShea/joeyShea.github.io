@@ -780,6 +780,7 @@ b i:last-child {
   position: relative;
   overflow: hidden;
   display: block;
+  border-radius: 3%;
 }
 
 .portfolio_item .portfolio_item_hover {
