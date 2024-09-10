@@ -834,6 +834,12 @@ b i:last-child {
   opacity: 0;
   font-size: 14px;
   letter-spacing: 2px;
+  -webkit-transition: color 0.2s ease-in-out 0.2s;
+  transition: color 0.2s ease-in-out 0.2s;
+}
+
+.portfolio_item .portfolio_item_hover .item_info em:hover {
+  background-color: #0066bf;
 }
 
 .portfolio_item:hover .portfolio_item_hover {
