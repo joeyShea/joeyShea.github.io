@@ -60,6 +60,10 @@ body {
   color: #404040;
 }
 
+.summary {
+  font-size: larger;
+}
+
 body {
   overflow: auto; /* Keep scrolling enabled */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
