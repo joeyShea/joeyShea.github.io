@@ -9,23 +9,248 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="ionicons/css/ionicons.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
     <script src="js/modernizr.js"></script>
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700);
+
+        html {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .body {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+            display: flexbox;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .box-headline {
+            font-size: 130px;
+            line-height: 1;
+        }
+
+        .box-words-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .box-words-wrapper b {
+            display: inline-block;
+            position: absolute;
+            white-space: nowrap;
+            left: 0;
+            top: 0;
+        }
+
+        .box-words-wrapper b.is-visible {
+            position: relative;
+        }
+
+        .no-js .box-words-wrapper b {
+            opacity: 0;
+        }
+
+        .no-js .box-words-wrapper b.is-visible {
+            opacity: 1;
+        }
+
+        .box-headline.rotate-2 .box-words-wrapper {
+            -webkit-perspective: 300px;
+            perspective: 300px;
+        }
+
+        .box-headline.rotate-2 i,
+        .box-headline.rotate-2 em {
+            display: inline-block;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .box-headline.rotate-2 b {
+            opacity: 0;
+        }
+
+        .box-headline.rotate-2 i {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform: translateZ(-20px) rotateX(90deg);
+            transform: translateZ(-20px) rotateX(90deg);
+            opacity: 0;
+        }
+
+        .is-visible .box-headline.rotate-2 i {
+            opacity: 1;
+        }
+
+        .box-headline.rotate-2 i.in {
+            -webkit-animation: box-rotate-2-in 0.4s forwards;
+            animation: box-rotate-2-in 0.4s forwards;
+        }
+
+        .box-headline.rotate-2 i.out {
+            -webkit-animation: box-rotate-2-out 0.4s forwards;
+            animation: box-rotate-2-out 0.4s forwards;
+        }
+
+        .box-headline.rotate-2 em {
+            -webkit-transform: translateZ(20px);
+            transform: translateZ(20px);
+        }
+
+        .no-csstransitions .box-headline.rotate-2 i {
+            -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+            opacity: 0;
+        }
+
+
+        .no-csstransitions .box-headline.rotate-2 i em {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .no-csstransitions .box-headline.rotate-2 .is-visible i {
+            opacity: 1;
+        }
+
+        @-webkit-keyframes box-rotate-2-in {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(90deg);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(-10deg);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(0deg);
+            }
+        }
+
+        @keyframes box-rotate-2-in {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(90deg);
+                transform: translateZ(-20px) rotateX(90deg);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(-10deg);
+                transform: translateZ(-20px) rotateX(-10deg);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(0deg);
+                transform: translateZ(-20px) rotateX(0deg);
+            }
+        }
+
+        @-webkit-keyframes box-rotate-2-out {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(0);
+            }
+
+            60% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(-100deg);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(-90deg);
+            }
+        }
+
+        @keyframes box-rotate-2-out {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateZ(-20px) rotateX(0);
+                transform: translateZ(-20px) rotateX(0);
+            }
+
+            60% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(-100deg);
+                transform: translateZ(-20px) rotateX(-100deg);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translateZ(-20px) rotateX(-90deg);
+                transform: translateZ(-20px) rotateX(-90deg);
+            }
+        }
+
+        h1 {
+            color: #525252;
+            font-size: 60px;
+            text-transform: uppercase;
+        }
+
+        .box-intro {
+            text-align: center;
+            display: table;
+            height: 100vh;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .box-intro .table-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .box-intro em {
+            font-style: normal;
+            text-transform: uppercase;
+        }
+
+        b i:last-child {
+            color: #0088ff !important;
+        }
+
+        .box-intro h4 {
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #999;
+            line-height: 1.7;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="main">
         <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">joey &nbsp; shea</b>
-                        <b>&nbsp;welcome!</b>
-                    </span>
-                </h1>
-            </div>
-        </section>
+
+            <h1 class="box-headline letters rotate-2" style="padding-top: 20%;">
+                <span class="box-words-wrapper">
+                    <b class="is-visible">joey &nbsp; shea</b>
+                    <b>&nbsp;welcome!</b>
+                </span>
+            </h1>
+            <section></section>
     </div>
+
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/menu.js"></script>
