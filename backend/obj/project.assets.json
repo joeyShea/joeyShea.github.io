@@ -80,11 +80,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jshea/Desktop/my-portfolio/backend/backend.csproj",
+      "projectUniqueName": "/Users/jshea/Documents/GitHub/joeyShea.github.io/backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "/Users/jshea/Desktop/my-portfolio/backend/backend.csproj",
+      "projectPath": "/Users/jshea/Documents/GitHub/joeyShea.github.io/backend/backend.csproj",
       "packagesPath": "/Users/jshea/.nuget/packages/",
-      "outputPath": "/Users/jshea/Desktop/my-portfolio/backend/obj/",
+      "outputPath": "/Users/jshea/Documents/GitHub/joeyShea.github.io/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jshea/.nuget/NuGet/NuGet.Config"
