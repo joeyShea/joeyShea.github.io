@@ -1,15 +1,9 @@
 /* Default (Desktop) Layout */
 #root {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
-}
-
-:root {
-    overflow: hidden;
 }
 
 .home-info {
@@ -18,15 +12,34 @@
     align-items: center;
 }
 
+.head-section {
+    display: flex;
+    flex-direction: row;
+    margin-top: 35vh;
+    margin-bottom: 35vh;
+}
+
 /* Adjust elements inside #root */
 .my-name {
     color: #c8c8c8;
     font-size: 8vw;
     white-space: nowrap;
     margin: 0vw 0vw -1vw 0vw;
+    transform: translateY(-100vh); /* Start way above */
+    animation: dropDown 0.5s cubic-bezier(0.15, 1, 0.3, 1) 0.8s forwards; /* Faster drop */
 }
 .my-name span {
     color: #0095ff;
+}
+@keyframes dropDown {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .summary {
@@ -40,11 +53,11 @@
 
 /* Mobile (Column Layout) */
 @media (max-width: 640px) {
-    #root {
+    .head-section {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        padding-top: 5vh;
+        margin-top: 10vh;
     }
 
     .my-name {
@@ -63,4 +76,16 @@
         margin-bottom: 10vh;
         margin-top: 3vh;
     }
+}
+
+section {
+    width: 100vw;
+    height: 10vh;
+    text-align: center;
+    padding-top: 10vh;
+
+    color: #c8c8c8;
+    font-size: calc(2vw + 3vh);
+    text-transform: uppercase;
+    font-weight: 600;
 }

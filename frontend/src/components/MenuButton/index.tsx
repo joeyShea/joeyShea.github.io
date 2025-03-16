@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import "./index.css";
 
 const SCALE_DISTANCE = 50;
@@ -15,7 +14,7 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
   const [mousePos, setMousePos] = useState<{ y: number } | null>(null);
   const [lineMove, setLineMove] = useState("8vw"); // Default movement
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const labelRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Track cursor Y-position inside menu
   useEffect(() => {
@@ -75,26 +74,37 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
       </div>
 
       {/* Side Menu */}
-      <nav ref={menuRef} className={`side-menu ${isHovered ? "visible" : "hidden"}`} onMouseLeave={() => setIsHovered(false)}
-      >
-        {pages.map((page, index) => (
-          <Link
-            key={page.name}
-            to={page.path}
-            ref={(el) => {
-              labelRefs.current[index] = el;
-            }}
-            className="menu-link"
-            style={{
-              transform: `scale(${getScale(index)})`,
-              transition: "transform 0.1s linear",
-              transformOrigin: "center",
-            }}
-          >
-            {page.name}
-          </Link>
-        ))}
-      </nav>
+      <nav
+  ref={menuRef}
+  className={`side-menu ${isHovered ? "visible" : "hidden"}`}
+  onMouseLeave={() => setIsHovered(false)}
+>
+  {pages.map((page, index) => (
+    <div
+      key={page.name}
+      ref={(el) => {
+        labelRefs.current[index] = el;
+      }}
+      className="menu-link"
+      style={{
+        transform: `scale(${getScale(index)})`,
+        transition: "transform 0.1s linear",
+        transformOrigin: "center",
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        const section = document.getElementById(page.path);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }}
+    >
+      {page.name}
+    </div>
+  ))}
+</nav>
+
+      
     </div>
   );
 };
