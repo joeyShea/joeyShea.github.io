@@ -8,13 +8,33 @@
     width: 100vw;
 }
 
+:root {
+    overflow: hidden;
+}
+
+.home-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* Adjust elements inside #root */
 .my-name {
     color: #c8c8c8;
-    font-size: 6vw;
+    font-size: 8vw;
     white-space: nowrap;
-    text-align: center;
-    margin-right: 5vw;
+    margin: 0vw 0vw 0vw 0vw;
+}
+.my-name span {
+    color: #0095ff;
+}
+
+.summary {
+    color: #c8c8c8;
+    font-size: calc(0.5vw + 1.5vh);
+    margin: 0vw 0vw 2vw 0vw;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 /* Mobile (Column Layout) */

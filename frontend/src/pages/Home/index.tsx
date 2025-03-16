@@ -13,7 +13,10 @@ const Home = () => {
 
     return (
       <>
-        <h1 className="my-name">JOEY SHEA</h1>
+      <div className="home-info">
+        <h1 className="my-name">JOEY <span>SHEA</span></h1>
+        <h2 className="summary">Computer & Data Science Student at the Raikes School of UNL</h2>
+      </div>
         <MenuButton pages={pages}/>
       </>
     );
