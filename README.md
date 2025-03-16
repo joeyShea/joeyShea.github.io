@@ -12,14 +12,5 @@ This is a personal portfolio that I am in the process of developing. I am using 
     - Typescript
     - CSS/HTML/JavaScript
 
-2. Backend
-
-    - C#
-    - .NET
-
-3. Database
-    - MySQL
-
-## Development
-
-1. Run both frontend and backend locally with ./start.sh (Unix-based systems only)
+2. Database
+    - Firebase

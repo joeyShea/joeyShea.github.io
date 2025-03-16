@@ -44,8 +44,7 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
     window.addEventListener("resize", updateLineMove);
   
     return () => window.removeEventListener("resize", updateLineMove);
-  }, []); // Runs when menu items change *or* on resize
-  
+  }, [pages.length]); // Runs when menu items change *or* on resize
 
   // Scale effect for menu items
   const getScale = (index: number) => {
@@ -63,14 +62,12 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
   return (
     <div
       className="hamburger-container"
-
     >
       {/* Menu Button */}
       <div
         className={`hamburger ${isHovered ? "open" : ""}`}
-        style={{ "--line-move": lineMove, zIndex: 1} as React.CSSProperties}
+        style={{ "--line-move": lineMove } as React.CSSProperties}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <span className="line top"></span>
         <span className="line middle"></span>
@@ -78,7 +75,8 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
       </div>
 
       {/* Side Menu */}
-      <nav ref={menuRef} className={`side-menu ${isHovered ? "visible" : "hidden"}`}>
+      <nav ref={menuRef} className={`side-menu ${isHovered ? "visible" : "hidden"}`} onMouseLeave={() => setIsHovered(false)}
+      >
         {pages.map((page, index) => (
           <Link
             key={page.name}
