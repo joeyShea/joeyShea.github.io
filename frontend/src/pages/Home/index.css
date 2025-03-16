@@ -1,3 +1,36 @@
-.hero-name {
-    color: white;
+/* Default (Desktop) Layout */
+#root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Adjust elements inside #root */
+.my-name {
+    color: #c8c8c8;
+    font-size: 6vw;
+    white-space: nowrap;
+    text-align: center;
+    margin-right: 5vw;
+}
+
+/* Mobile (Column Layout) */
+@media (max-width: 640px) {
+    #root {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 5vh;
+    }
+
+    .my-name {
+        font-size: 22vw;
+        line-height: 0.95;
+        margin-right: 0;
+        text-align: center;
+        white-space: pre-line; /* Allows break between first & last name */
+    }
 }

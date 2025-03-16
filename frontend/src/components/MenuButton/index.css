@@ -1,0 +1,76 @@
+.hamburger-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0vw 1vw 0vw 1vw;
+}
+
+.hamburger {
+    width: calc(1.5vw + 4vh);
+    height: calc(1.5vw + 3vh);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    transition: all 0.5s ease-in-out;
+}
+
+.line {
+    width: 100%;
+    height: calc(0.3vw + 0.3vh);
+    background-color: #c8c8c8;
+    border-radius: 5vw;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Side menu (adjusts dynamically to content size) */
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-items: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+.side-menu.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.side-menu.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Adjust movement of lines dynamically */
+.hamburger.open .top {
+    transform: translateY(calc(-1 * var(--line-move))); /* Moves up dynamically */
+}
+
+.hamburger.open .bottom {
+    transform: translateY(var(--line-move)); /* Moves down dynamically */
+}
+
+.hamburger.open .middle {
+    opacity: 0;
+}
+
+/* Links */
+.menu-link {
+    font-size: calc(1.5vw + 2vh);
+    text-decoration: none;
+    color: #c8c8c8;
+    text-align: center;
+}
+
+.menu-link:hover {
+    text-decoration: underline;
+}
