@@ -23,7 +23,7 @@
     color: #c8c8c8;
     font-size: 8vw;
     white-space: nowrap;
-    margin: 0vw 0vw 0vw 0vw;
+    margin: 0vw 0vw -1vw 0vw;
 }
 .my-name span {
     color: #0095ff;
@@ -32,7 +32,7 @@
 .summary {
     color: #c8c8c8;
     font-size: calc(0.5vw + 1.5vh);
-    margin: calc(2vh - 0.5vw) 0vw 2vw 0vw;
+    margin: 0vw;
     font-weight: 400;
     text-transform: uppercase;
     text-align: center;
@@ -51,7 +51,7 @@
         font-size: 22vw;
         line-height: 0.95;
         margin-right: 0;
-        margin-top: 15vw;
+        margin-top: 20vw;
         text-align: center;
         white-space: pre-line; /* Allows break between first & last name */
     }
@@ -60,5 +60,7 @@
         width: 75vw;
         font-weight: 400;
         text-transform: uppercase;
+        margin-bottom: 10vh;
+        margin-top: 3vh;
     }
 }
