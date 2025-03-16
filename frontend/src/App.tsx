@@ -11,6 +11,10 @@ import Contact from "./pages/Contact";
 function App() {
   return (
     <>
+    <div className="banner">
+    🚧 I'm in the process of completely recreating my portfolio! 🚧
+    </div>
+
     <Router>
       <Routes>
         <Route path="/" element={<Home/>} />
