@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./index.css";
 
 type Project = {
@@ -14,24 +14,8 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "OurPact",
-    description: "Semester-long Group Project for Innovation Processes Class.",
-    images: ["/project_images/ourpact.png", "/project_images/ourpact2.png"],
-    list: [
-      "Worked with a small group over 15 weeks to develop a concept application and business model",
-      "Utilized customer profiles, prototyping, and market research",
-      "The project culminated in a 10-minute pitch of our idea to a board of venture capitalists",
-    ],
-    technologies: [
-      { name: "Figma", logo: "/icons/figma.svg" }
-    ],
-    category: "Software Engineering"
-  },
-  {
-    id: 2,
     title: "NERTS!",
     description: "Full-stack web application developed with a team of four",
-    images: ["/project_images/ourpact.png", "/project_images/ourpact2.png"],
     list: [
       "Designed and wireframed application with Figma",
       "Created accessable and user-friendly frontend with React",
@@ -49,10 +33,24 @@ const projects: Project[] = [
     category: "Software Engineering"
   },
   {
+    id: 2,
+    title: "OurPact",
+    description: "Semester-long Group Project for Innovation Processes Class.",
+    images: ["/project_images/ourpact.png", "/project_images/ourpact2.png"],
+    list: [
+      "Worked with a small group over 15 weeks to develop a concept application and business model",
+      "Utilized customer profiles, prototyping, and market research",
+      "The project culminated in a 10-minute pitch of our idea to a board of venture capitalists",
+    ],
+    technologies: [
+      { name: "Figma", logo: "/icons/figma.svg" }
+    ],
+    category: "Software Engineering"
+  },
+  {
     id: 3,
     title: "Data Analysis",
     description: "Semester-long Pair Project for Statistics Class",
-    images: ["/project_images/clarify.png"],
     list: [
       "Worked with a partner to collect data about campus gym usage",
       "Conducted a survey to gather qualitative data for corroboration",
@@ -68,7 +66,6 @@ const projects: Project[] = [
     id: 4,
     title: "Clarify",
     description: "Semester-long Group Project for Marketing Class",
-    images: ["/project_images/clarify.png"],
     list: [
       "Worked with a small group over 15 weeks to develop a concept product and business model.",
       "Utilized customer profiles, market research, and marketing strategies."
@@ -83,7 +80,6 @@ const projects: Project[] = [
     id: 5,
     title: "Roblox vs. EA",
     description: "Semester-long Group Project for Accounting Class",
-    images: ["/project_images/clarify.png"],
     list: [
       "Performed an in-depth analysis of the financial statements of two companies",
       "Compiled a comprehensive report comparing the two",
@@ -97,7 +93,6 @@ const projects: Project[] = [
     id: 6,
     title: "Opportunity Atlas",
     description: "Semester-long Group Project for Economics Class",
-    images: ["/project_images/clarify.png"],
     list: [
       "Analyzed large-scale, real-world data about income in the United States.",
     ],
@@ -111,7 +106,6 @@ const projects: Project[] = [
     id: 7,
     title: "Portfolio Websites",
     description: "Created multiple portfolio websites",
-    images: ["/project_images/clarify.png"],
     list: [
       "Developed multiple static portfolio websites for myself and others",
       "Used both vanilla HTML/CSS/JS and React, hosted on Github Pages",
@@ -122,11 +116,11 @@ const projects: Project[] = [
     ],
     category: "Software Engineering"
   },
-  
 ];
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
 
   // Group projects by category
   const groupedProjects = projects.reduce((acc, project) => {
@@ -136,6 +130,35 @@ const Projects = () => {
     acc[project.category].push(project);
     return acc;
   }, {} as Record<string, Project[]>);
+
+  const handleImageClick = (image: string) => {
+    setExpandedImage(image);
+  };
+
+  useEffect(() => {
+    if (expandedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [expandedImage]);
+  
+  const closeModal = () => {
+    setExpandedImage(null);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+  
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="projects-section">
@@ -173,10 +196,33 @@ const Projects = () => {
             </div>
           ))}
         </div>
+        {/* Image Gallery */}
+        {selectedProject.images && selectedProject.images.length > 0 && (
+          <>
+            <h2>Images:</h2>
+            <div className="image-gallery">
+              {selectedProject.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Project ${selectedProject.title} image ${index + 1}`}
+                  className="image-preview"
+                  onClick={() => handleImageClick(image)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Full-screen Image Modal */}
+        {expandedImage && (
+        <div className="image-modal" onClick={closeModal}>
+            <img src={expandedImage} alt="Expanded preview" className="expanded-image" />
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
 
 export default Projects;
