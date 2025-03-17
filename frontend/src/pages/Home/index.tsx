@@ -20,9 +20,9 @@ const Home = () => {
 
     return (
       <>
-        <div className="banner">
+        {/* <div className="banner">
           🚧 This is a new portfolio, it's a work in progress! 🚧
-        </div>
+        </div> */}
 
         <div className="head-section">
           <div className="home-info">

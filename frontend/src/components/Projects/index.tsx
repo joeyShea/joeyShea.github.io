@@ -49,6 +49,21 @@ const projects: Project[] = [
   },
   {
     id: 3,
+    title: "Sports Modeling",
+    description: "Semester-long group project for Machine Learning Class",
+    list: [
+      "Worked with a team to gather historical data about NBA statistics",
+      "In the process of building a machine learning model to predict future outcomes"
+    ],
+    technologies: [
+      { name: "Python", logo: "/icons/python.svg" },
+      { name: "Pytorch", logo: "/icons/pytorch.svg" },
+      { name: "Git", logo: "/icons/git.svg" },
+    ],
+    category: "Statistics & ML"
+  },
+  {
+    id: 4,
     title: "Data Analysis",
     description: "Semester-long Pair Project for Statistics Class",
     list: [
@@ -63,7 +78,7 @@ const projects: Project[] = [
     category: "Statistics & ML"
   },
   {
-    id: 4,
+    id: 5,
     title: "Clarify",
     description: "Semester-long Group Project for Marketing Class",
     list: [
@@ -77,7 +92,7 @@ const projects: Project[] = [
     category: "Business"
   },
   {
-    id: 5,
+    id: 6,
     title: "Roblox vs. EA",
     description: "Semester-long Group Project for Accounting Class",
     list: [
@@ -90,7 +105,7 @@ const projects: Project[] = [
     category: "Business"
   },
   {
-    id: 6,
+    id: 7,
     title: "Opportunity Atlas",
     description: "Semester-long Group Project for Economics Class",
     list: [
@@ -103,7 +118,7 @@ const projects: Project[] = [
     category: "Business"
   },
   {
-    id: 7,
+    id: 8,
     title: "Portfolio Websites",
     description: "Created multiple portfolio websites",
     list: [
@@ -115,7 +130,7 @@ const projects: Project[] = [
       { name: "Github", logo: "/icons/github.svg" },
     ],
     category: "Software Engineering"
-  },
+  }
 ];
 
 const Projects = () => {
