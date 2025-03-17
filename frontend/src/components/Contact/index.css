@@ -1,0 +1,92 @@
+.contact {
+    text-align: center;
+}
+
+.note {
+    font-size: 1.5vw;
+    color: white;
+    font-weight: 500;
+    margin-top: 1vw;
+}
+
+.contact p {
+    font-size: 1.5vw;
+    color: white;
+    font-weight: 300;
+}
+
+.copyable {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.copyable:hover {
+    color: #0095ff; /* Highlight color on hover */
+}
+
+/* Subtle Copy Notification */
+.copy-notification {
+    position: fixed;
+    bottom: 2vw;
+    right: 2vw;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Fade-out effect when disappearing */
+.copy-notification:not(:empty) {
+    animation: fadeOut 2s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Social Icons */
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    text-decoration: none; /* Removes underline */
+}
+
+.icon {
+    color: #0095ff;
+    transition: transform 0.2s ease, color 0.3s ease;
+    text-decoration: none; /* Removes underline */
+    font-size: 4vw;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+    .note {
+        font-size: 2vh;
+    }
+
+    .contact p {
+        font-size: 2vh;
+    }
+    .icon {
+        font-size: 4vh;
+    }
+}

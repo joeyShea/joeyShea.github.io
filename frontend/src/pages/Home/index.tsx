@@ -2,6 +2,9 @@ import "./index.css"
 
 // Components
 import MenuButton from "../../components/MenuButton";
+import About from "../../components/About";
+import Contact from "../../components/Contact";
+import SineWave from "../../components/SineWave";
 
 const Home = () => {
   const pages = [
@@ -24,11 +27,14 @@ const Home = () => {
           </div>
           <MenuButton pages={pages}/>
         </div>
+        <SineWave/>
 
         <section id="about">About</section>
+        <About/>
         <section id="education">Education</section>
         <section id="projects">Projects</section>
         <section id="contact">Contact</section>
+        <Contact/>
       </>
     );
   };
