@@ -23,7 +23,6 @@ a {
 
 .text {
     width: 50vw;
-    height: 25vw;
     font-size: 1.5vw;
     color: white;
     font-weight: 300;
@@ -45,9 +44,8 @@ a {
 
     .text {
         width: 80vw;
-        height: 25vh;
         font-size: 2vh;
         color: white;
-        margin-bottom: 9vh;
+        margin-bottom: 5vh;
     }
 }
