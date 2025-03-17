@@ -9,11 +9,13 @@ const Education = () => {
                 <img src={raikes} alt="Raikes school logo" />
                 <div className="text">
                     <h3>Jeffrey S. Raikes School of Computer Science and Management</h3>
-                    <p>- The Raikes School is an interdisciplinary program at the University of Nebraska-Lincoln. <br></br>
-                        - It offers a unique curriculum that combines advanced computer science and business management 
-                        courses. <br></br>
-                        - I've been exposed to many important 
-                        business topics, as well as leadership and teamwork exercises.</p>
+                    <ul>
+                        <li>The Raikes School is an interdisciplinary program at the University of Nebraska-Lincoln</li>
+                        <li>It offers a unique curriculum that combines advanced computer science and business management 
+                        courses</li>
+                        <li>I've been exposed to many important 
+                        business topics, as well as leadership and teamwork exercises</li>
+                    </ul>
                 </div>
             </div>
         </div>

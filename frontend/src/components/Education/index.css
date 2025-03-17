@@ -2,7 +2,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 7vw;
+    margin-bottom: 3vw;
 }
 
 .raikes {
@@ -16,4 +16,18 @@
 
 .text {
     line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+    .raikes {
+        flex-direction: column;
+        align-items: center;
+    }
+    .raikes img {
+        width: 60vw;
+        height: 60vw;
+    }
+    .text h3 {
+        text-align: center;
+    }
 }
