@@ -7,13 +7,12 @@ const Experience = () => {
           company: "Virtual Incision Corporation",
           date: "May 2024 - March 2025",
           points: [
-            "Developed web applications using CSS, HTML, and JavaScript",
             "Replicated a physical system to aid in training scenarios",
             "Followed protocol to test surgical robot hardware and mobile app APIs",
           ],
           technologies: [
             { name: "JS", logo: "/icons/js.svg" },
-            { name: "React", logo: "/icons/html.svg" },
+            { name: "HTML", logo: "/icons/html.svg" },
             { name: "CSS", logo: "/icons/css.svg" }
           ],
         },
