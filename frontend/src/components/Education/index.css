@@ -1,0 +1,19 @@
+.education {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7vw;
+}
+
+.raikes {
+    display: flex;
+    justify-content: space-between;
+}
+.raikes img {
+    width: 25vw;
+    height: 25vw;
+}
+
+.text {
+    line-height: 1.5;
+}

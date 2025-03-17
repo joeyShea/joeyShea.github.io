@@ -6,7 +6,11 @@
     position: relative;
     margin: 0vw 0vw 0vw 5vw;
 }
-
+@media (max-width: 640px) {
+    .hamburger-container {
+        margin: 0px;
+    }
+}
 .hamburger {
     width: calc(1.5vw + 4vh);
     height: calc(1.5vw + 3vh);

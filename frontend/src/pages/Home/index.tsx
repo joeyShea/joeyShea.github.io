@@ -4,6 +4,7 @@ import "./index.css"
 import MenuButton from "../../components/MenuButton";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
+import Education from "../../components/Education";
 import Projects from "../../components/Projects";
 import SineWave from "../../components/SineWave";
 
@@ -18,7 +19,7 @@ const Home = () => {
     return (
       <>
         <div className="banner">
-          🚧 I'm in the process of completely recreating my portfolio! 🚧
+          🚧 This is a new portfolio, it's a work in progress! 🚧
         </div>
 
         <div className="head-section">
@@ -30,9 +31,12 @@ const Home = () => {
         </div>
         <SineWave/>
 
+        <div className="spacer"></div>
+
         <section id="about">About</section>
         <About/>
         <section id="education">Education</section>
+        <Education/>
         <section id="projects">Projects</section>
         <Projects/>
         <section id="contact">Contact</section>

@@ -3,12 +3,15 @@
     flex-direction: row;
     gap: 3vw;
     margin-top: 5vw;
+    margin-bottom: 5vw;
 }
 
 ul li {
     margin-bottom: calc(1vh + 0.5vw); /* Adjust spacing as needed */
 }
-
+a {
+    color: white;
+}
 .me-photo {
     width: 25vw;
     height: 25vw;

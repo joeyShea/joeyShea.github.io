@@ -95,7 +95,10 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
       onClick={() => {
         const section = document.getElementById(page.path);
         if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
+          const offset = 100; // Adjust this value as needed
+          const topPosition = section.getBoundingClientRect().top + window.scrollY - offset;
+      
+          window.scrollTo({ top: topPosition, behavior: "smooth" });
         }
       }}
     >

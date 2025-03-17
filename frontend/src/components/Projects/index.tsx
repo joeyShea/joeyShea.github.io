@@ -16,8 +16,7 @@ const projects: Project[] = [
     description: "Semester-long Group Project for Innovation Processes Class.",
     images: [
         "/project_images/ourpact.png",
-        "/project_images/ourpact.png",
-        "/project_images/ourpact.png",
+        "/project_images/ourpact2.png"
       ],
     list: [
         "Worked with a small group over 15 weeks to develop a concept application and business model",
@@ -27,15 +26,13 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Marketing Project",
-    description: "A React-based weather application with live API data.",
-    images: ["/images/weather.png",]
-  },
-  {
-    id: 3,
-    title: "Accounting Project",
-    description: "A simple task manager built with Firebase for real-time updates.",
-    images: ["/images/taskmanager.png"],
+    title: "Clarify - Marketing Project",
+    description: "Semester-long Group Project for Marketing Class",
+    images: ["/project_images/clarify.png"],
+    list: [
+        "Worked with a small group over 15 weeks to develop a concept product and business model.",
+        "Utilized customer profiles, market research, and marketing strategies."
+    ],
   },
   {
     id: 4,
