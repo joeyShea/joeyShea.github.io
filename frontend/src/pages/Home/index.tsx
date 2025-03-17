@@ -4,6 +4,7 @@ import "./index.css"
 import MenuButton from "../../components/MenuButton";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
+import Projects from "../../components/Projects";
 import SineWave from "../../components/SineWave";
 
 const Home = () => {
@@ -33,6 +34,7 @@ const Home = () => {
         <About/>
         <section id="education">Education</section>
         <section id="projects">Projects</section>
+        <Projects/>
         <section id="contact">Contact</section>
         <Contact/>
       </>
