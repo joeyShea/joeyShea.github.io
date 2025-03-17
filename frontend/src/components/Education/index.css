@@ -16,6 +16,7 @@
 
 .text {
     line-height: 1.5;
+    margin-bottom: 1vw;
 }
 
 @media (max-width: 640px) {
@@ -33,7 +34,7 @@
 }
 
 .download-buttons {
-    margin-top: 20px;
+    margin-top: calc(1vw + 0.5vh);
     display: flex;
     gap: 15px;
     justify-content: center;
