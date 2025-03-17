@@ -21,6 +21,7 @@ const projects: Project[] = [
       "Created accessable and user-friendly frontend with React",
       "Added backend multiplayer functionality with Node.js and Socket.io",
     ],
+    images: ["/project_images/nerts1.png", "/project_images/nerts2.png"],
     technologies: [
       { name: "Figma", logo: "/icons/figma.svg" },
       { name: "React", logo: "/icons/react.svg" },
