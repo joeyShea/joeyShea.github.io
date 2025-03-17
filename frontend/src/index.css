@@ -37,3 +37,10 @@ body {
     font-weight: bold;
     z-index: 1000; /* Ensures it's above everything */
 }
+
+@media (max-width: 640px) {
+    body {
+        width: 100%;
+        outline: none;
+    }
+}

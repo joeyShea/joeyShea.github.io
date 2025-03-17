@@ -70,6 +70,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1rem;
+    justify-content: left;
 }
 
 .tech-box {
@@ -120,11 +121,9 @@
     .project-title,
     .category-title {
         text-wrap: wrap;
-        font-size: 0.8rem;
     }
-    .tech-box {
-        width: 31%;
-        font-size: 0.8rem;
+    .tech-list {
+        justify-content: center;
     }
 }
 
