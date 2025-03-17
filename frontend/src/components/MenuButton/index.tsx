@@ -12,7 +12,7 @@ interface MenuButtonProps {
 const MenuButton = ({ pages }: MenuButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState<{ y: number } | null>(null);
-  const [lineMove, setLineMove] = useState("8vw"); // Default movement
+  const [lineMove, setLineMove] = useState("0px"); // Default movement
   const menuRef = useRef<HTMLDivElement | null>(null);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -37,8 +37,6 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
     };
   }, []);
   
-
-  // Calculate line movement based on menu height
   useEffect(() => {
     const updateLineMove = () => {
       if (menuRef.current) {
@@ -48,10 +46,13 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
     };
   
     updateLineMove(); // Run once on mount
+
+    setTimeout(updateLineMove, 100); // Ensure it runs after render
+
     window.addEventListener("resize", updateLineMove);
   
     return () => window.removeEventListener("resize", updateLineMove);
-  }, [pages.length]); // Runs when menu items change *or* on resize
+  }, []); // Empty dependency array -> runs ONLY on mount  
 
   // Scale effect for menu items
   const getScale = (index: number) => {
@@ -65,7 +66,13 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
       ? MAX_SCALE - (distance / SCALE_DISTANCE) * (MAX_SCALE - MIN_SCALE - 0.1)
       : MIN_SCALE;
   };
-
+  setTimeout(() => {
+    if (menuRef.current) {
+      const menuHeight = menuRef.current.offsetHeight;
+      setLineMove(`${menuHeight / 2}px`); // Move half of menu height
+    }
+  }, 100);
+  
   return (
     <div
       className="hamburger-container"
@@ -114,10 +121,9 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
     </div>
   ))}
 </nav>
-
-      
     </div>
   );
 };
+
 
 export default MenuButton;
