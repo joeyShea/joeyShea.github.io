@@ -72,7 +72,7 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
       setLineMove(`${menuHeight / 2}px`); // Move half of menu height
     }
   }, 100);
-  
+
   return (
     <div
       className="hamburger-container"

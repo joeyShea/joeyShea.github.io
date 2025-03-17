@@ -31,13 +31,13 @@
 /* Subtle Copy Notification */
 .copy-notification {
     position: fixed;
-    bottom: 2vw;
-    right: 2vw;
+    bottom: calc(2vw + 1vh);
+    right: calc(2vw + 2vh);
     background: rgba(255, 255, 255, 1);
     color: #0095ff;
-    padding: 10px 15px;
+    padding: 15px 20px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: calc(1vw + 1vh);
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
