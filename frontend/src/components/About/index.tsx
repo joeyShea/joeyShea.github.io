@@ -12,7 +12,7 @@ const About = () => {
                 <li>I'm now finishing my Sophomore year, and am very enthusiastic to continue my coursework and internship</li>
                 <li>I love to learn and contribute to real projects</li>
                 
-                <br></br>Clifton-Strengths:<br></br> Harmony, Intellection, Analytical, Relator, Futuristic
+                <br></br><b>Clifton-Strengths:</b><br></br> Harmony, Intellection, Analytical, Relator, Futuristic
             </ul>
         </div>
         </>

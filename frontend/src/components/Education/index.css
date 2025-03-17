@@ -10,8 +10,12 @@
     justify-content: space-between;
 }
 .raikes img {
-    width: 25vw;
-    height: 25vw;
+    width: 20vw;
+    height: 20vw;
+    background-color: white;
+    border-radius: 1vw;
+    padding: 1vw;
+    margin-top: 1vw;
 }
 
 .text {
@@ -34,7 +38,7 @@
 }
 
 .download-buttons {
-    margin-top: calc(1vw + 0.5vh);
+    margin-top: calc(2vw + 0.5vh);
     display: flex;
     gap: 15px;
     justify-content: center;
@@ -42,14 +46,14 @@
 
 .download-btn {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #0095ff;
     color: white;
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .download-btn:hover {
-    background-color: #0056b3;
+    background-color: #0086e6;
 }

@@ -4,6 +4,7 @@ import "./index.css"
 import MenuButton from "../../components/MenuButton";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
+import Experience from "../../components/Experience";
 import Education from "../../components/Education";
 import Projects from "../../components/Projects";
 import SineWave from "../../components/SineWave";
@@ -11,6 +12,7 @@ import SineWave from "../../components/SineWave";
 const Home = () => {
   const pages = [
     { name: "About Me", path: "about" },
+    { name: "Experience", path: "experience" },
     { name: "Education", path: "education" },
     { name: "Projects", path: "projects" },
     { name: "Contact", path: "contact" },
@@ -35,6 +37,8 @@ const Home = () => {
 
         <section id="about">About</section>
         <About/>
+        <section id="experience">Experience</section>
+        <Experience/>
         <section id="education">Education</section>
         <Education/>
         <section id="projects">Projects</section>

@@ -20,15 +20,23 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       if (menuRef.current?.contains(event.target as Node)) {
-        setMousePos({ y: event.clientY });
-      } else {
-        setMousePos(null);
+        setMousePos({ y: event.clientY }); // Update position inside the menu
       }
     };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+  
+    const handleMouseLeave = () => {
+      setMousePos(null); // Reset only when leaving the entire menu
+    };
+  
+    document.addEventListener("mousemove", handleMouseMove);
+    menuRef.current?.addEventListener("mouseleave", handleMouseLeave);
+  
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      menuRef.current?.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
+  
 
   // Calculate line movement based on menu height
   useEffect(() => {
@@ -54,7 +62,7 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
     const distance = Math.abs(mousePos.y - labelY);
 
     return distance < SCALE_DISTANCE
-      ? MAX_SCALE - (distance / SCALE_DISTANCE) * (MAX_SCALE - MIN_SCALE)
+      ? MAX_SCALE - (distance / SCALE_DISTANCE) * (MAX_SCALE - MIN_SCALE - 0.1)
       : MIN_SCALE;
   };
 

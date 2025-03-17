@@ -28,7 +28,7 @@
 
 .line {
     width: 100%;
-    height: calc(0.3vw + 0.3vh);
+    height: calc(0.2vw + 0.2vh);
     background-color: white;
     border-radius: 5vw;
     transition: all 0.5s ease-in-out;
@@ -70,10 +70,11 @@
 
 /* Links */
 .menu-link {
-    font-size: calc(1.5vw + 2vh);
+    font-size: calc(1.2vw + 1.5vh);
     text-decoration: none;
-    color: #c8c8c8;
+    color: white;
     text-align: center;
+    font-weight: 200;
 }
 
 .menu-link:hover {

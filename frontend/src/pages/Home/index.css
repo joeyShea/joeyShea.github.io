@@ -25,15 +25,19 @@
 
 /* Adjust elements inside #root */
 .my-name {
-    color: #c8c8c8;
+    color: white;
     font-size: 8vw;
     white-space: nowrap;
+    font-weight: 400;
     margin: 0vw 0vw -1vw 0vw;
     transform: translateY(-100vh); /* Start way above */
     animation: dropDown 0.5s cubic-bezier(0.15, 1, 0.3, 1) 0.8s forwards; /* Faster drop */
 }
 .my-name span {
-    color: #0095ff;
+    background: linear-gradient(to right, white, #0095ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 @keyframes dropDown {
     0% {
@@ -47,7 +51,7 @@
 }
 
 .summary {
-    color: #c8c8c8;
+    color: #c0c0c0;
     font-size: calc(0.5vw + 1.5vh);
     margin: 0vw;
     font-weight: 400;
@@ -87,10 +91,10 @@ section {
     height: 10vh;
     text-align: center;
 
-    color: #c8c8c8;
+    color: white;
     font-size: calc(2vw + 3vh);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .section-content {

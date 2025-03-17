@@ -8,6 +8,7 @@
 
 ul li {
     margin-bottom: calc(1vh + 0.5vw); /* Adjust spacing as needed */
+    color: #c8c8c8;
 }
 a {
     color: white;
@@ -16,15 +17,15 @@ a {
     width: 25vw;
     height: 25vw;
     border-radius: 100vw;
-    border: 0.75vw solid white;
-    background-color: rgba(0, 0, 0, 0.2);
+    border: 0.3vw solid #0095ff;
+    background: #191919;
     margin-left: 3vw;
 }
 
 .text {
     width: 50vw;
     font-size: 1.5vw;
-    color: white;
+    color: #c8c8c8;
     font-weight: 300;
     margin-top: 0.5vw;
 }
@@ -45,7 +46,7 @@ a {
     .text {
         width: 80vw;
         font-size: 2vh;
-        color: white;
+        color: #c8c8c8;
         margin-bottom: 5vh;
     }
 }

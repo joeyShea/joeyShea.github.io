@@ -5,7 +5,7 @@
     font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
-    background-color: #2e2e2e;
+    background-color: #000000;
 }
 
 html {
@@ -19,7 +19,8 @@ body {
     margin: 0;
     width: 90%;
     min-height: 100vh;
-    background-color: #404040;
+    background-color: black;
+    outline: 0.3vw white solid;
     overscroll-behavior-y: none;
 }
 

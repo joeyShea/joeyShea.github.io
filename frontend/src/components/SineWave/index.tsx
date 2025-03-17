@@ -39,7 +39,7 @@ const SineWave = () => {
       }
 
       ctx.strokeStyle = "#0095ff";
-      ctx.lineWidth = 30;
+      ctx.lineWidth = 5;
       ctx.stroke();
 
       phase += speed * 0.01; // Moves the wave
