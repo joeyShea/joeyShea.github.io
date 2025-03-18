@@ -2,7 +2,7 @@
 
 ## About
 
-This is a personal portfolio that I am in the process of developing. I am using a more robust stack than strictly necessary in order to improve my overall development skills, while hopefully creating a unique personal website.
+This is a personal portfolio that I am in the process of developing.
 
 ## Tech Stack
 
@@ -12,5 +12,5 @@ This is a personal portfolio that I am in the process of developing. I am using 
     - Typescript
     - CSS/HTML/JavaScript
 
-2. Database
+2. Database (WIP)
     - Firebase
