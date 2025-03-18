@@ -20,6 +20,7 @@ const projects: Project[] = [
       "Designed and wireframed application with Figma",
       "Created accessable and user-friendly frontend with React",
       "Added backend multiplayer functionality with Node.js and Socket.io",
+      "Added login/signup and statistics collection with Firebase"
     ],
     images: ["/project_images/nerts1.png", "/project_images/nerts2.png"],
     technologies: [
@@ -30,6 +31,7 @@ const projects: Project[] = [
       { name: "CSS", logo: "/icons/css.svg" },
       { name: "Socket", logo: "/icons/socketio.svg" },
       { name: "Git", logo: "/icons/git.svg" },
+      { name: "Firebase", logo: "/icons/firebase.svg" },
     ],
     category: "Software Engineering"
   },
