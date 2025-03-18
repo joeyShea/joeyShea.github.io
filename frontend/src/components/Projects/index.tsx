@@ -72,6 +72,7 @@ const projects: Project[] = [
       "Conducted a survey to gather qualitative data for corroboration",
       "Created a report about our findings with matplotlib visuals"
     ],
+    images: ["/project_images/stats1.png", "/project_images/stats2.png"],
     technologies: [
       { name: "Python", logo: "/icons/python.svg" },
       { name: "Excel", logo: "/icons/excel.svg" }

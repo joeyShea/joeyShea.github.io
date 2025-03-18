@@ -52,7 +52,7 @@ const SineWave = () => {
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", display: "block" }} />;
+  return <canvas ref={canvasRef} style={{ width: "100%", display: "block"}} />;
 };
 
 export default SineWave;

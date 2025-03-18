@@ -7,6 +7,7 @@ const Experience = () => {
           company: "Virtual Incision Corporation",
           date: "May 2024 - March 2025",
           points: [
+            "Created web applications using CSS, HTML, and JavaScript",
             "Replicated a physical system to aid in training scenarios",
             "Followed protocol to test surgical robot hardware and mobile app APIs",
           ],
@@ -21,7 +22,7 @@ const Experience = () => {
           company: "Raikes School Summer Camp",
           date: "July 2024",
           points: [
-            "Taught and supervised 50+ high school seniors for two weeks for a Computer Science summer camp",
+            "Supervised 50+ high school seniors for two weeks at a Computer Science summer camp",
             "Taught beginner/advanced programming lessons daily",
             "Led campers through company tours, leadership and teamwork exercises, and other activities",
           ],

@@ -27,7 +27,7 @@ const Home = () => {
         <div className="head-section">
           <div className="home-info">
             <h1 className="my-name">JOEY <span>SHEA</span></h1>
-            <h2 className="summary">Computer & Data Science Student at the Raikes School of UNL</h2>
+            <h2 className="summary">Computer Science & Data Science Student at the Raikes School</h2>
           </div>
           <MenuButton pages={pages}/>
         </div>

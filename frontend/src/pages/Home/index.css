@@ -28,13 +28,14 @@
     color: white;
     font-size: 8vw;
     white-space: nowrap;
-    font-weight: 400;
+    font-weight: 300;
     margin: 0vw 0vw -1vw 0vw;
     transform: translateY(-100vh); /* Start way above */
     animation: dropDown 0.5s cubic-bezier(0.15, 1, 0.3, 1) 0.8s forwards; /* Faster drop */
 }
 .my-name span {
     color: #0095ff;
+    font-weight: 500;
 }
 @keyframes dropDown {
     0% {
