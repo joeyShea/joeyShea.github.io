@@ -5,11 +5,11 @@ import "./index.css";
 const Contact = () => {
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
-  // Function to copy text and show notification
+  // Copy text and show notification
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopiedText(text); // Show notification
-      setTimeout(() => setCopiedText(null), 2000); // Hide after 2s
+      setCopiedText(text);
+      setTimeout(() => setCopiedText(null), 2000);
     }).catch(err => console.error("Failed to copy:", err));
   };
 

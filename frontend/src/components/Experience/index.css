@@ -1,3 +1,4 @@
+/* Default (Desktop) Layout */
 .experience {
     width: 90%;
     display: flex;
@@ -14,7 +15,7 @@
 
 .experience-item {
     display: flex;
-    align-items: stretch; /* Changed to stretch to ensure full height */
+    align-items: stretch;
     position: relative;
     background: #191919;
     border-radius: 1vw;
@@ -32,19 +33,19 @@
 .experience-content {
     padding: 1.5rem;
     margin-left: 3rem;
-    width: 70%; /* Reduced to make room for tech stack */
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    overflow-wrap: break-word; /* Prevents text overflow */
+    overflow-wrap: break-word;
     word-wrap: break-word;
 }
 
 .tech-stack {
     display: flex;
     flex-direction: column;
-    width: 30%; /* Set fixed width */
+    width: 30%;
     padding: 1.5rem 1.5rem 1.5rem 0;
     gap: 1rem;
     align-items: center;
@@ -54,7 +55,7 @@
 .title {
     font-size: 2rem;
     font-weight: 400;
-    color: white; /* Title is white */
+    color: white;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
     text-transform: uppercase;
@@ -62,12 +63,12 @@
 
 .company {
     font-size: 1.2rem;
-    color: #c0c0c0; /* Restored to c0c0c0 */
+    color: #c0c0c0;
 }
 
 .date {
     font-size: 1rem;
-    color: #c0c0c0; /* Restored to c0c0c0 */
+    color: #c0c0c0;
     margin-bottom: 1rem;
 }
 
@@ -77,11 +78,10 @@ ul {
 
 li {
     font-size: 1rem;
-    color: #c0c0c0; /* Changed to c0c0c0 */
+    color: #c0c0c0;
     margin-bottom: 0.5rem;
 }
 
-/* Individual Tech Boxes */
 .tech-box {
     width: 30%;
     height: 4rem;
@@ -111,20 +111,21 @@ li {
     color: white;
 }
 
+/* Mobile (Column Layout) */
 @media (max-width: 640px) {
     .experience-item {
         flex-direction: column;
     }
 
     .experience-content {
-        width: calc(100% - 30px); /* Adjust width to prevent overflow */
+        width: calc(100% - 30px);
         margin-left: 30px;
         padding: 1.5rem 1.5rem 1.5rem 0;
     }
 
     .tech-stack {
         flex-direction: row;
-        width: calc(90%); /* Adjust width to match content */
+        width: calc(90%);
         padding: 0 1.5rem 1.5rem 0;
         margin-left: 30px;
         flex-wrap: wrap;
@@ -139,13 +140,13 @@ li {
 
     .title {
         font-size: 1.2rem;
-        color: white; /* Maintaining white color */
+        color: white;
     }
 
     .company,
     .date,
     li {
         font-size: 0.9rem;
-        color: #c0c0c0; /* Ensuring c0c0c0 color */
+        color: #c0c0c0;
     }
 }

@@ -1,3 +1,4 @@
+/* Default (Desktop) Layout */
 .hamburger-container {
     display: flex;
     flex-direction: column;
@@ -6,11 +7,7 @@
     position: relative;
     margin: 0vw 0vw 0vw 5vw;
 }
-@media (max-width: 640px) {
-    .hamburger-container {
-        margin: 0px;
-    }
-}
+
 .hamburger {
     width: calc(1.5vw + 4vh);
     height: calc(1.5vw + 3vh);
@@ -35,7 +32,6 @@
     pointer-events: none;
 }
 
-/* Side menu (adjusts dynamically to content size) */
 .side-menu {
     display: flex;
     flex-direction: column;
@@ -55,20 +51,18 @@
     pointer-events: none;
 }
 
-/* Adjust movement of lines dynamically */
 .hamburger.open .top {
-    transform: translateY(calc(-1 * var(--line-move))); /* Moves up dynamically */
+    transform: translateY(calc(-1 * var(--line-move)));
 }
 
 .hamburger.open .bottom {
-    transform: translateY(var(--line-move)); /* Moves down dynamically */
+    transform: translateY(var(--line-move));
 }
 
 .hamburger.open .middle {
     opacity: 0;
 }
 
-/* Links */
 .menu-link {
     font-size: calc(1.2vw + 1.5vh);
     text-decoration: none;
@@ -79,4 +73,11 @@
 
 .menu-link:hover {
     text-decoration: underline;
+}
+
+/* Mobile (Column Layout) */
+@media (max-width: 640px) {
+    .hamburger-container {
+        margin: 0px;
+    }
 }

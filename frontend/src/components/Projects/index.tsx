@@ -152,6 +152,7 @@ const Projects = () => {
     setExpandedImage(image);
   };
 
+  // Stops scrolling when an image is fullscreen
   useEffect(() => {
     if (expandedImage) {
       document.body.style.overflow = "hidden";
@@ -164,6 +165,7 @@ const Projects = () => {
     setExpandedImage(null);
   };
 
+  // Closes fullscreen photo on escape press
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -213,6 +215,7 @@ const Projects = () => {
             </div>
           ))}
         </div>
+        
         {/* Image Gallery */}
         {selectedProject.images && selectedProject.images.length > 0 && (
           <>

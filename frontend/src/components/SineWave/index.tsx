@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 const SineWave = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  let phase = 0; // Tracks wave movement
+  let phase = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -13,7 +13,7 @@ const SineWave = () => {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = 200; // Adjust height as needed
+      canvas.height = 200;
     };
 
     resizeCanvas();
@@ -25,13 +25,13 @@ const SineWave = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.beginPath();
 
-      const amplitude = 20; // Wave height
-      const frequency = 0.02; // Wave frequency
-      const speed = -1; // Wave speed
+      const amplitude = 20; // height
+      const frequency = 0.02; // frequency
+      const speed = -1; // speed
       const yOffset = canvas.height / 2;
 
       ctx.moveTo(0, yOffset);
-      const waveOffset = 50; // Shifts the start position to the left
+      const waveOffset = 50;
 
       for (let x = -waveOffset; x < canvas.width; x++) {
         const y = yOffset + amplitude * Math.sin(x * frequency + phase);
@@ -42,7 +42,7 @@ const SineWave = () => {
       ctx.lineWidth = 5;
       ctx.stroke();
 
-      phase += speed * 0.01; // Moves the wave
+      phase += speed * 0.01;
 
       requestAnimationFrame(drawWave);
     };

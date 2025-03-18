@@ -1,3 +1,4 @@
+/* Default (Desktop) Layout */
 .about {
     display: flex;
     flex-direction: row;
@@ -7,7 +8,7 @@
 }
 
 ul li {
-    margin-bottom: calc(1vh + 0.5vw); /* Adjust spacing as needed */
+    margin-bottom: calc(1vh + 0.5vw);
     color: #c8c8c8;
 }
 a {
@@ -29,6 +30,7 @@ a {
     font-weight: 300;
     margin-top: 0.5vw;
 }
+
 /* Mobile (Column Layout) */
 @media (max-width: 640px) {
     .me-photo {

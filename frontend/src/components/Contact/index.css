@@ -1,3 +1,4 @@
+/* Default (Desktop) Layout */
 .contact {
     text-align: center;
     margin-top: 2vw;
@@ -25,10 +26,9 @@
 }
 
 .copyable:hover {
-    color: #0095ff; /* Highlight color on hover */
+    color: #0095ff;
 }
 
-/* Subtle Copy Notification */
 .copy-notification {
     position: fixed;
     bottom: calc(2vw + 1vh);
@@ -42,7 +42,6 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Fade-out effect when disappearing */
 .copy-notification:not(:empty) {
     animation: fadeOut 2s ease-in-out forwards;
 }
@@ -59,19 +58,18 @@
     }
 }
 
-/* Social Icons */
 .social-icons {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 20px;
-    text-decoration: none; /* Removes underline */
+    text-decoration: none;
 }
 
 .icon {
     color: #0095ff;
     transition: transform 0.2s ease-in-out, color 0.3s ease;
-    text-decoration: none; /* Removes underline */
+    text-decoration: none;
     font-size: 4vw;
 }
 
@@ -79,6 +77,7 @@
     transform: scale(1.2);
 }
 
+/* Mobile (Column Layout) */
 @media (max-width: 640px) {
     .note {
         font-size: 2vh;

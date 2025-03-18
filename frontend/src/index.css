@@ -29,13 +29,13 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 165, 0, 0.5); /* Semi-transparent orange */
+    background-color: rgba(255, 165, 0, 0.5);
     color: white;
     text-align: center;
     font-size: 1.2rem;
     padding: 1vw 0vw 1vw 0vw;
     font-weight: bold;
-    z-index: 1000; /* Ensures it's above everything */
+    z-index: 1000;
 }
 
 @media (max-width: 640px) {
