@@ -21,8 +21,8 @@ const Education = () => {
 
             {/* Download Buttons */}
             <div className="download-buttons">
-            <a href="/documents/js_transcript.pdf" target="_blank" className="download-btn">View Transcript</a>
-            <a href="/documents/js_resume.pdf" target="_blank" className="download-btn">View Resume</a>
+            <a href="/documents/js_transcript.pdf" target="_blank" className="download-btn incButton">View Transcript</a>
+            <a href="/documents/js_resume.pdf" target="_blank" className="download-btn incButton">View Resume</a>
             </div>
         </div>
     </>

@@ -20,7 +20,7 @@ const Contact = () => {
       {/* Clickable Email */}
       <p>
         Email: 
-        <span className="copyable" onClick={() => copyToClipboard("27josephs@gmail.com")}>
+        <span className="copyable incButton" onClick={() => copyToClipboard("27josephs@gmail.com")}>
           27josephs@gmail.com
         </span>
       </p>
@@ -28,7 +28,7 @@ const Contact = () => {
       {/* Clickable Phone */}
       <p>
         Phone: 
-        <span className="copyable" onClick={() => copyToClipboard("7858442569")}>
+        <span className="copyable incButton" onClick={() => copyToClipboard("7858442569")}>
           +1 (785) 844-2569
         </span>
       </p>
@@ -36,13 +36,13 @@ const Contact = () => {
       {/* Social Icons */}
       <div className="social-icons">
         <a href="https://github.com/joeyShea" target="_blank" rel="noopener noreferrer">
-          <FaGithub className="icon" />
+          <FaGithub className="icon incButton" />
         </a>
         <a href="https://www.linkedin.com/in/joey-shea" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin className="icon" />
+          <FaLinkedin className="icon incButton" />
         </a>
         <a href="https://www.instagram.com/joey.shea2/profilecard/?igsh=eWN0aXBic3p6ZmE3" target="_blank" rel="noopener noreferrer">
-          <FaInstagram className="icon" />
+          <FaInstagram className="icon incButton" />
         </a>
       </div>
 

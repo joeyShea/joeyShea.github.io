@@ -1,0 +1,107 @@
+h2 {
+    color: white;
+    font-size: calc(1.5vw + 1vh);
+    width: 80%;
+    text-align: center;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
+.main-box {
+    width: 90%;
+    height: 50vh;
+    outline: #0095ff solid 0.5vw;
+    border-radius: 2vw;
+    margin: 2vw 0vw 7vw 0vw;
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vw;
+}
+
+.main-box p {
+    margin: 0px;
+    color: white;
+    text-align: center;
+    font-size: calc(1.5vw + 1vh);
+    font-weight: 600;
+    margin-bottom: 1vw;
+}
+
+.bars {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+    height: 99%;
+    width: 100%;
+}
+.bars div {
+    width: 20%;
+    background-color: #0095ff;
+    border-radius: 1vw 1vw 0vw 0vw;
+    height: 100px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    min-height: 4vw;
+}
+
+.bars div::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 140%;
+    transform: translateX(-50%) translateY(40%);
+    color: white;
+    font-weight: 500;
+    font-size: calc(1.5vw + 0.5vh);
+    text-align: center;
+}
+
+.bars div::before {
+    content: attr(data-quant);
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: 500;
+    font-size: calc(2vw + 1vh);
+    text-align: center;
+    line-height: 1;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    margin: 0px;
+}
+
+.dashed-bar {
+    width: 100%;
+    border-top: 0.4vw dotted #c8c8c8;
+    height: 0.5vw;
+}
+
+.dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: white;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.selected-mode p {
+    font-size: 1rem;
+    color: #0095ff;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents wrapping if the text is too long */
+}

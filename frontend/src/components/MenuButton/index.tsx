@@ -98,7 +98,7 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
                         ref={(el) => {
                             labelRefs.current[index] = el;
                         }}
-                        className="menu-link"
+                        className="menu-link incButton"
                         style={{
                             transform: `scale(${getScale(index)})`,
                             transition: "transform 0.1s linear",

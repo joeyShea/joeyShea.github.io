@@ -1,0 +1,26 @@
+button.submit,
+button.refresh,
+.dropdown {
+    padding: calc(1vw+1vh) 1vw;
+    background-color: #0095ff;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 1vw;
+    font-size: calc(1vw + 1vh);
+    transition: background-color 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+button.submit:hover,
+button.refresh:hover,
+.dropdown {
+    background-color: #0086e6;
+}
+
+button.submit img,
+button.refresh img {
+    width: 1.5vw;
+    margin-left: 1vw;
+}

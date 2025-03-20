@@ -19,16 +19,15 @@ const projects: Project[] = [
     list: [
       "Designed and wireframed application with Figma",
       "Created accessable and user-friendly frontend with React",
-      "Added backend multiplayer functionality with Node.js and Socket.io",
+      "Added backend multiplayer functionality with Node.js and Socket.io with Express routing",
       "Added login/signup and statistics collection with Firebase"
     ],
     images: ["/project_images/nerts1.png", "/project_images/nerts2.png"],
     technologies: [
       { name: "Figma", logo: "/icons/figma.svg" },
       { name: "React", logo: "/icons/react.svg" },
+      { name: "Express", logo: "/icons/express.svg" },
       { name: "Node.js", logo: "/icons/node.svg" },
-      { name: "HTML", logo: "/icons/html.svg" },
-      { name: "CSS", logo: "/icons/css.svg" },
       { name: "Socket", logo: "/icons/socketio.svg" },
       { name: "Git", logo: "/icons/git.svg" },
       { name: "Firebase", logo: "/icons/firebase.svg" },
@@ -190,7 +189,7 @@ const Projects = () => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className={`project-title ${selectedProject.id === project.id ? "active" : ""}`}
+                className={`project-title incButton ${selectedProject.id === project.id ? "active" : ""}`}
                 onClick={() => setSelectedProject(project)}
               >
                 {project.title}
@@ -228,7 +227,7 @@ const Projects = () => {
                   key={index}
                   src={image}
                   alt={`Project ${selectedProject.title} image ${index + 1}`}
-                  className="image-preview"
+                  className="image-preview incButton"
                   onClick={() => handleImageClick(image)}
                 />
               ))}

@@ -7,6 +7,7 @@ import Contact from "../../components/Contact";
 import Experience from "../../components/Experience";
 import Education from "../../components/Education";
 import Projects from "../../components/Projects";
+import Stats from "../../components/Stats";
 import SineWave from "../../components/SineWave";
 
 const Home = () => {
@@ -21,7 +22,6 @@ const Home = () => {
   return (
     <>
       {/* <div className="banner">🚧 Message 🚧</div> */}
-
 
       <div className="head-section">
         <div className="home-info">
@@ -42,6 +42,8 @@ const Home = () => {
       <Education/>
       <section id="projects">Projects</section>
       <Projects/>
+      <section id="contact">Stats</section>
+      <Stats/>
       <section id="contact">Contact</section>
       <Contact/>
     </>
