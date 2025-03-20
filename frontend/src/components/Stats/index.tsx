@@ -200,6 +200,8 @@ const modeMaxValues = viewMode === "Average User"
         <p>{viewMode}</p>
         <div className="dashed-bar"></div>
 
+        <div className="max">Max ↓</div>
+
         <div className="bars">
         <StatsBar 
           label="Buttons Pressed"

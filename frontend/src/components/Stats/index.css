@@ -83,7 +83,14 @@ h2 {
     border-top: 0.4vw dotted #c8c8c8;
     height: 0.5vw;
 }
-
+.max {
+    position: absolute;
+    font-size: calc(1.5vw + 1vh);
+    color: white;
+    transform: translateY(1vw) translateX(1.3vw);
+    margin: 0px;
+    text-align: center;
+}
 .dropdown-container {
     display: flex;
     align-items: center;
