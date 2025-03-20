@@ -1,7 +1,7 @@
 button.submit,
 button.refresh,
 .dropdown {
-    padding: calc(1vw+1vh) 1vw;
+    padding: calc(1vw + 1vh) 1vw;
     background-color: #0095ff;
     color: white;
     text-decoration: none;
