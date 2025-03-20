@@ -42,7 +42,7 @@ const Home = () => {
       <Education/>
       <section id="projects">Projects</section>
       <Projects/>
-      <section id="contact">Stats</section>
+      <section id="stats">Stats</section>
       <Stats/>
       <section id="contact">Contact</section>
       <Contact/>
