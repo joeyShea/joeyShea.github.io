@@ -2,6 +2,20 @@ import "./index.css";
 
 const Experience = () => {
     const experiences = [
+            {
+            title: "Software Engineering Intern",
+            company: "Hudl",
+            date: "May 2025 - Present",
+            points: [
+                "Developed and deployed features for web and mobile using React, React Native, and TypeScript",
+                "Participated in weekly sprint ceremonies and frequent code reviews",
+                "Led and participated in dogfooding sessions to gather feedback on new features",
+            ],
+            technologies: [
+                { name: "React", logo: "/icons/react.svg" },
+                { name: "TS", logo: "/icons/ts.svg" },
+            ],
+        },
         {
             title: "Software Intern",
             company: "Virtual Incision Corporation",

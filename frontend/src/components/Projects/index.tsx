@@ -55,7 +55,7 @@ const projects: Project[] = [
     description: "Semester-long group project for Machine Learning Class",
     list: [
       "Worked with a team to gather historical data about NBA statistics",
-      "In the process of building a machine learning model to predict future outcomes"
+      "Built a machine learning model to predict future outcomes of NBA games"
     ],
     technologies: [
       { name: "Python", logo: "/icons/python.svg" },
