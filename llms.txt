@@ -1,0 +1,18 @@
+# Joey Shea
+
+> Computer Science & Data Science student at the Jeffrey S. Raikes School (University of Nebraska–Lincoln) and a software engineering intern at Garmin. Builds LLM-powered tools, full-stack applications, and data projects.
+
+This is the personal portfolio and résumé of Joey Shea. Contact: 27josephs@gmail.com.
+
+## Projects
+
+- [Grafle](https://grafle.xyz): A free, live game that teaches you to recognize the world's languages and writing systems at a glance. Built with React, Vite, Leaflet, and Supabase.
+- [Travela (source)](https://github.com/joeyShea/travel-map): A full-featured travel review platform designed and deployed in a 24-hour hackathon. Next.js, AWS (RDS, S3, ECR).
+- [Stock Dashboard (source)](https://github.com/joeyShea/StockDashboard): A live terminal dashboard for markets and Federal Reserve data, pulling from FRED and Yahoo Finance. Python.
+
+## Links
+
+- [Portfolio](https://joeyshea.github.io/)
+- [GitHub](https://github.com/joeyShea)
+- [LinkedIn](https://www.linkedin.com/in/joey-shea)
+- [Résumé (PDF)](https://joeyshea.github.io/documents/js_resume.pdf)
