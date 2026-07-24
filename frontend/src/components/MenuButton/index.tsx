@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./index.css";
 
 const SCALE_DISTANCE = 50;
@@ -6,121 +6,112 @@ const MAX_SCALE = 1.5;
 const MIN_SCALE = 1;
 
 interface MenuButtonProps {
-    pages: { name: string; path: string }[];
+  pages: { name: string; path: string }[];
 }
 
 const MenuButton = ({ pages }: MenuButtonProps) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const [mousePos, setMousePos] = useState<{ y: number } | null>(null);
-    const [lineMove, setLineMove] = useState("0px");
+  const [open, setOpen] = useState(false);
+  const [mouseY, setMouseY] = useState<number | null>(null);
+  const [lineMove, setLineMove] = useState("0px");
 
-    const menuRef = useRef<HTMLDivElement | null>(null);
-    const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<HTMLElement | null>(null);
+  const labelRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-    // Track cursor Y-position inside menu
-    useEffect(() => {
-        const handleMouseMove = (event: MouseEvent) => {
-            if (menuRef.current?.contains(event.target as Node)) {
-                setMousePos({ y: event.clientY });
-            }
-        };
-
-        const handleMouseLeave = () => {
-            setMousePos(null); // Reset only when leaving the entire menu
-        };
-
-        document.addEventListener("mousemove", handleMouseMove);
-        menuRef.current?.addEventListener("mouseleave", handleMouseLeave);
-
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-            menuRef.current?.removeEventListener("mouseleave", handleMouseLeave);
-        };
-    }, []);
-
-    useEffect(() => {
-        const updateLineMove = () => {
-            if (menuRef.current) {
-                const menuHeight = menuRef.current.offsetHeight;
-                setLineMove(`${menuHeight / 2}px`);
-            }
-        };
-
-        updateLineMove();
-        setTimeout(updateLineMove, 100);
-
-        window.addEventListener("resize", updateLineMove);
-
-        return () => window.removeEventListener("resize", updateLineMove);
-    }, []);
-
-    // Scale effect for menu items
-    const getScale = (index: number) => {
-        if (!mousePos || !labelRefs.current[index]) return MIN_SCALE;
-
-        const rect = labelRefs.current[index]!.getBoundingClientRect();
-        const labelY = rect.top + rect.height / 2;
-        const distance = Math.abs(mousePos.y - labelY);
-
-        return distance < SCALE_DISTANCE
-            ? MAX_SCALE - (distance / SCALE_DISTANCE) * (MAX_SCALE - MIN_SCALE - 0.1)
-            : MIN_SCALE;
+  // Measure half the menu height so the hamburger lines can "spread" to frame it.
+  useEffect(() => {
+    const update = () => {
+      if (menuRef.current) setLineMove(`${menuRef.current.offsetHeight / 2}px`);
     };
-    setTimeout(() => {
-        if (menuRef.current) {
-            const menuHeight = menuRef.current.offsetHeight;
-            setLineMove(`${menuHeight / 2}px`);
-        }
-    }, 100);
+    update();
+    const t = setTimeout(update, 120);
+    window.addEventListener("resize", update);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", update);
+    };
+  }, [pages.length]);
 
-    return (
-        <div className="hamburger-container">
-            {/* Menu Button */}
-            <div
-                className={`hamburger ${isHovered ? "open" : ""}`}
-                style={{ "--line-move": lineMove } as React.CSSProperties}
-                onMouseEnter={() => setIsHovered(true)}
-            >
-                <span className="line top"></span>
-                <span className="line middle"></span>
-                <span className="line bottom"></span>
-            </div>
+  // Track cursor Y for the magnify effect, only while open.
+  useEffect(() => {
+    if (!open) {
+      setMouseY(null);
+      return;
+    }
+    const onMove = (e: MouseEvent) => {
+      setMouseY(menuRef.current?.contains(e.target as Node) ? e.clientY : null);
+    };
+    document.addEventListener("mousemove", onMove);
+    return () => document.removeEventListener("mousemove", onMove);
+  }, [open]);
 
-            {/* Side Menu */}
-            <nav
-                ref={menuRef}
-                className={`side-menu ${isHovered ? "visible" : "hidden"}`}
-                onMouseLeave={() => setIsHovered(false)}
-            >
-                {pages.map((page, index) => (
-                    <div
-                        key={page.name}
-                        ref={(el) => {
-                            labelRefs.current[index] = el;
-                        }}
-                        className="menu-link incButton"
-                        style={{
-                            transform: `scale(${getScale(index)})`,
-                            transition: "transform 0.1s linear",
-                            transformOrigin: "center",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => {
-							const section = document.getElementById(page.path);
-                            if (section) {
-                                const offset = 130; // Adjust this value as needed
-                                const topPosition = section.getBoundingClientRect().top + window.scrollY - offset;
+  // Close when clicking/tapping outside (covers touch, where mouseleave never fires).
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
 
-                                window.scrollTo({ top: topPosition, behavior: "smooth" });
-                            }
-                        }}
-                    >
-                        {page.name}
-                    </div>
-                ))}
-            </nav>
-        </div>
-    );
+  const getScale = (index: number) => {
+    const el = labelRefs.current[index];
+    if (mouseY === null || !el) return MIN_SCALE;
+    const rect = el.getBoundingClientRect();
+    const dist = Math.abs(mouseY - (rect.top + rect.height / 2));
+    return dist < SCALE_DISTANCE
+      ? MAX_SCALE - (dist / SCALE_DISTANCE) * (MAX_SCALE - MIN_SCALE - 0.1)
+      : MIN_SCALE;
+  };
+
+  const goTo = useCallback((path: string) => {
+    document.getElementById(path)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setOpen(false);
+  }, []);
+
+  return (
+    <div
+      className="menu"
+      ref={containerRef}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        className={`hamburger ${open ? "open" : ""}`}
+        style={{ "--line-move": lineMove } as React.CSSProperties}
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="line top" />
+        <span className="line middle" />
+        <span className="line bottom" />
+      </button>
+
+      <nav
+        ref={menuRef}
+        className={`side-menu ${open ? "visible" : ""}`}
+        aria-label="Section navigation"
+      >
+        {pages.map((page, index) => (
+          <button
+            key={page.path}
+            type="button"
+            ref={(el) => {
+              labelRefs.current[index] = el;
+            }}
+            className="menu-link"
+            style={{ transform: `scale(${getScale(index)})` }}
+            onClick={() => goTo(page.path)}
+          >
+            {page.name}
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
 };
 
 export default MenuButton;

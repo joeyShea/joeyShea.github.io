@@ -1,177 +1,488 @@
-/* Default (Desktop) Layout */
-.projects-section {
-    display: flex;
-    flex-direction: row;
-    width: 90%;
-    max-width: 1200px;
-    margin: 3vw auto;
-    gap: 1rem;
+.projects {
+    display: grid;
+    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
 }
 
-.projects-section * {
-    box-sizing: border-box;
-}
-
-.projects-selector {
-    width: 30%;
+/* ---------- Selector ---------- */
+.proj-selector {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    background: #191919;
-    padding: 1rem;
-    border-radius: 1vw;
-    max-height: 65vh;
+    gap: 1.1rem;
+    padding: 1rem 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    position: sticky;
+    top: 1.5rem;
+    max-height: calc(100vh - 3rem);
     overflow-y: auto;
 }
 
-.project-title {
-    cursor: pointer;
-    padding: 0.4rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
-    color: #c8c8c8;
-    background: #252525;
-    text-align: center;
-    margin-top: 0.4rem;
-}
-
-.project-title:hover {
-    background: #333;
-    color: white;
-}
-
-.project-title.active {
-    background: #007bff;
-    color: white;
-    font-weight: bold;
-}
-
-.project-details {
-    width: 90vw;
-    background: #191919;
-    padding: 1rem;
-    border-radius: 1vw;
-}
-
-.project-details h2 {
-    color: white;
-    text-align: left;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-}
-
-.project-details p {
-    color: #c8c8c8;
-}
-
-.tech-list {
+.proj-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    justify-content: left;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
-.tech-box {
-    width: 7rem;
-    height: 4rem;
+.proj-group-title {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+    padding: 0 0.55rem 0.35rem;
+    margin: 0;
+}
+
+.proj-tab {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    background: #252525;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    font-size: 0.92rem;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-left: 2px solid transparent;
+    border-radius: var(--r-xs);
+    padding: 0.5rem 0.6rem;
     cursor: pointer;
-    text-align: center;
-    color: white;
+    transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+.proj-tab:hover {
+    color: var(--text);
+    background: var(--surface-2);
+}
+.proj-tab.active {
+    color: var(--heading);
+    background: var(--surface-2);
+    border-left-color: var(--accent);
+    font-weight: 500;
 }
 
-.tech-box img {
-    width: 2.2rem;
-    height: 2.2rem;
+.proj-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #57d98c;
+}
+.proj-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2fd27a;
+    box-shadow: 0 0 0 3px rgba(47, 210, 122, 0.16);
+    flex: none;
 }
 
-.tech-box:hover {
-    transform: scale(1.1);
+/* ---------- Detail ---------- */
+.proj-detail {
+    display: grid;
+    /* write-up on the left, a rail for gallery + skills on the right, so the
+       panel tracks the selector's height instead of running far past it */
+    grid-template-columns: minmax(0, 1fr) clamp(11rem, 26%, 17rem);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    min-width: 0;
+    animation: projIn 0.4s var(--ease);
+}
+.proj-detail-main {
+    min-width: 0;
+}
+@keyframes projIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.category-title {
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    margin: 0.5rem 0;
-    text-align: center;
-    border-bottom: 1px solid #c8c8c8;
-    padding-bottom: 0.3rem;
+.proj-detail-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.25rem;
+    flex-wrap: wrap;
+}
+.proj-detail-heading {
+    min-width: 0;
+}
+.proj-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-top: 0.35rem;
 }
 
-.image-gallery {
+.proj-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: 0.7rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+.proj-meta-sep { color: var(--muted-dim); }
+.proj-meta-status { font-weight: 500; }
+.proj-meta-status--building { color: #f2c14e; }
+.proj-meta-status--shipped { color: var(--accent-link); }
+
+.proj-tagline {
     margin-top: 1rem;
-    margin-left: 0.2rem;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 62ch;
 }
 
-.image-preview {
-    width: 6rem;
-    height: 4rem;
-    object-fit: cover;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+/* ---------- Links (inline with the title) ---------- */
+.proj-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    flex: none;
+}
+.proj-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.55rem 1rem;
+    border-radius: var(--r-xs);
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    background: transparent;
+    transition: transform 0.16s var(--ease), border-color 0.16s ease, background 0.16s ease;
+}
+.proj-link:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+    color: var(--heading);
+}
+.proj-link svg { font-size: 1.05em; }
+.proj-link--primary {
+    background: var(--accent-solid);
+    border-color: var(--accent-solid);
+    color: #fff;
+}
+.proj-link--primary:hover {
+    background: var(--accent-solid-hover);
+    border-color: var(--accent-solid-hover);
+    color: #fff;
 }
 
-.image-preview:hover {
-    transform: scale(1.1);
+/* ---------- Highlights ---------- */
+.proj-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 68ch;
 }
-
-.image-modal {
-    position: fixed;
-    top: 0;
+.proj-highlights li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text);
+}
+.proj-highlights li::before {
+    content: "";
+    position: absolute;
     left: 0;
+    top: 0.6em;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--accent);
+}
+
+/* ---------- Aside (gallery + skills rail) ---------- */
+.proj-aside {
+    align-self: stretch;
+    min-width: 0;
+}
+/* stays in view while a long write-up scrolls past */
+.proj-aside-sticky {
+    position: sticky;
+    top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.proj-aside-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+    color: var(--muted-dim);
+}
+.proj-aside-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4em;
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--muted);
+    letter-spacing: 0;
+}
+
+.proj-skills {
+    gap: 0.4rem;
+}
+
+/* ---------- Deck ----------
+   Cards fan downward, each lightly overlapping the one above it.        */
+.proj-deck {
+    /* percentage margins resolve against width, so overlap scales with the rail */
+    --deck-overlap: 16%;
+    display: flex;
+    flex-direction: column;
+}
+
+.proj-deck-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    padding: 0;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    transition: transform 0.22s var(--ease), border-color 0.2s ease, box-shadow 0.22s var(--ease);
+}
+.proj-deck-card + .proj-deck-card {
+    margin-top: calc(-1 * var(--deck-overlap));
+}
+.proj-deck-card img {
+    display: block;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    object-fit: cover;
+    object-position: top;
+}
+/* stacking order is fixed; hover simply hops the card straight up */
+.proj-deck-card:hover,
+.proj-deck-card:focus-visible {
+    transform: translateY(-0.7rem);
+    border-color: var(--accent);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.proj-note {
+    margin-top: 1.1rem;
+    font-size: 0.8rem;
+    color: var(--muted-dim);
+    font-style: italic;
+}
+
+/* ---------- Modal ---------- */
+.proj-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
+    /* room for the arrows at the sides and the toolbar underneath */
+    padding: clamp(3.25rem, 8vmin, 5rem) clamp(3.75rem, 9vmin, 6rem) clamp(4.75rem, 10vmin, 6.5rem);
     z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.proj-modal-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+.proj-modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    cursor: zoom-in;
+    touch-action: none;
+    user-select: none;
+    transition: transform 0.18s var(--ease);
+}
+.proj-modal-img.zoomed {
+    cursor: grab;
+}
+.proj-modal-img.dragging {
+    cursor: grabbing;
+    transition: none;
 }
 
-.expanded-image {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 1rem;
+/* round control buttons shared by close / prev / next */
+.proj-modal-close,
+.proj-modal-nav {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s var(--ease);
+}
+.proj-modal-close:hover,
+.proj-modal-nav:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.proj-modal-close {
+    top: max(1.2rem, 3vmin);
+    right: max(1.2rem, 3vmin);
+    z-index: 2;
+}
+.proj-modal-nav {
+    top: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.6rem;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.proj-modal-nav.prev { left: max(0.75rem, 2vmin); }
+.proj-modal-nav.next { right: max(0.75rem, 2vmin); }
+.proj-modal-nav:hover { transform: translateY(-50%) scale(1.06); }
+
+/* ---------- Viewer toolbar ---------- */
+.proj-modal-bar {
+    position: absolute;
+    bottom: max(1rem, 3vmin);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.5rem;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+}
+.proj-modal-bar button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1.05rem;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+.proj-modal-bar button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+.proj-modal-bar button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+.proj-modal-counter,
+.proj-modal-zoom {
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding: 0 0.5rem;
+    white-space: nowrap;
+}
+.proj-modal-counter {
+    border-right: 1px solid var(--line);
+    margin-right: 0.15rem;
+}
+.proj-modal-zoom {
+    min-width: 3.4rem;
+    text-align: center;
 }
 
-/* Mobile (Column Layout) */
-@media (max-width: 640px) {
-    .projects-section {
-        flex-direction: column;
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+    .projects {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
     }
-
-    .projects-selector {
-        width: 100%;
+    .proj-selector {
+        position: static;
+        max-height: none;
         flex-direction: row;
+        gap: 1rem;
         overflow-x: auto;
+        padding: 0.85rem;
+    }
+    .proj-group {
+        flex: none;
+    }
+    .proj-tab {
         white-space: nowrap;
-        padding: 0.5rem;
     }
-
-    .project-details {
-        width: 100%;
+    .proj-detail-head {
+        align-items: flex-start;
+        gap: 0.6rem 1rem;
     }
-
-    .category {
-        width: 30%;
+    /* stack the write-up and its rail; the rail is too narrow here */
+    .proj-detail {
+        grid-template-columns: minmax(0, 1fr);
     }
-    .project-title,
-    .category-title {
-        text-wrap: wrap;
+    .proj-aside-sticky {
+        position: static;
     }
-    .tech-list {
-        justify-content: center;
+    .proj-deck {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+        gap: 0.7rem;
+    }
+    .proj-deck-card + .proj-deck-card {
+        margin-top: 0;
+    }
+    .proj-deck-card:hover,
+    .proj-deck-card:focus-visible {
+        transform: translateY(-0.3rem);
+    }
+    .proj-modal-nav {
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.3rem;
     }
 }

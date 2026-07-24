@@ -1,83 +1,125 @@
 import "./index.css";
 
+type Experience = {
+  title: string;
+  company: string;
+  location: string;
+  date: string;
+  current?: boolean;
+  points: string[];
+  tech: string[];
+};
+
+const TECH_ICONS: Record<string, string> = {
+  Python: "/icons/python.svg",
+  React: "/icons/react.svg",
+  TypeScript: "/icons/ts.svg",
+  JavaScript: "/icons/js.svg",
+  HTML: "/icons/html.svg",
+  CSS: "/icons/css.svg",
+  Java: "/icons/java.svg",
+};
+
+const experiences: Experience[] = [
+  {
+    title: "Software Engineering Intern",
+    company: "Garmin",
+    location: "Olathe, KS",
+    date: "May 2026 – Present",
+    current: true,
+    points: [
+      "Built a cloud-infrastructure reconciliation engine that identifies orphaned resources across the platform and improves overall visibility.",
+      "Refactored OpenStack provider layer into a structured, typed API, replacing raw SDK object usage to improve reliability for Temporal-based workflows.",
+    ],
+    tech: ["Temporal", "Spring Boot", "Python", "Pydantic"],
+  },
+  {
+    title: "RAIK 183H Teaching Assistant",
+    company: "University of Nebraska–Lincoln",
+    location: "Lincoln, NE",
+    date: "Present",
+    current: true,
+    points: [
+      "Support instruction of programming fundamentals in Java for first-year computer science students.",
+    ],
+    tech: ["Java"],
+  },
+  {
+    title: "Software Engineering Intern",
+    company: "Hudl",
+    location: "Lincoln, NE",
+    date: "May 2025 – Sept 2025",
+    points: [
+      "Developed and deployed features across web and mobile — user data-control functionality, action logging, and bug fixes.",
+      "Worked in Agile: weekly sprint ceremonies, frequent code reviews, and business-unit reviews.",
+    ],
+    tech: ["React", "TypeScript", "Snowplow"],
+  },
+  {
+    title: "Software Intern",
+    company: "Virtual Incision",
+    location: "Lincoln, NE",
+    date: "May 2024 – April 2025",
+    points: [
+      "Built a web app for testing and prototyping surgical-console UI.",
+      "Tested surgical-robot hardware and mobile APIs, helping resolve critical issues before product launch.",
+    ],
+    tech: ["JavaScript", "HTML", "CSS"],
+  },
+  {
+    title: "Teaching Assistant",
+    company: "Raikes School Summer Camp",
+    location: "Lincoln, NE",
+    date: "2024 – 2025",
+    points: [
+      "Taught and assisted 50+ high-school students with Java and Python lessons.",
+      "Led company tours, leadership and teamwork exercises, and daily camp activities.",
+    ],
+    tech: ["Python", "Java"],
+  },
+];
+
 const Experience = () => {
-    const experiences = [
-            {
-            title: "Software Engineering Intern",
-            company: "Hudl",
-            date: "May 2025 - Present",
-            points: [
-                "Developed and deployed features for web and mobile using React, React Native, and TypeScript",
-                "Participated in weekly sprint ceremonies and frequent code reviews",
-                "Led and participated in dogfooding sessions to gather feedback on new features",
-            ],
-            technologies: [
-                { name: "React", logo: "/icons/react.svg" },
-                { name: "TS", logo: "/icons/ts.svg" },
-            ],
-        },
-        {
-            title: "Software Intern",
-            company: "Virtual Incision Corporation",
-            date: "May 2024 - March 2025",
-            points: [
-                "Created web applications using CSS, HTML, and JavaScript",
-                "Replicated a physical system to aid in training scenarios",
-                "Followed protocol to test surgical robot hardware and mobile app APIs",
-            ],
-            technologies: [
-                { name: "JS", logo: "/icons/js.svg" },
-                { name: "HTML", logo: "/icons/html.svg" },
-                { name: "CSS", logo: "/icons/css.svg" },
-            ],
-        },
-        {
-            title: "Teaching Assistant",
-            company: "Raikes School Summer Camp",
-            date: "July 2024",
-            points: [
-                "Supervised 50+ high school seniors for two weeks at a Computer Science summer camp",
-                "Taught beginner/advanced programming lessons daily",
-                "Led campers through company tours, leadership and teamwork exercises, and other activities",
-            ],
-            technologies: [
-                { name: "Python", logo: "/icons/python.svg" },
-                { name: "Java", logo: "/icons/java.svg" },
-            ],
-        },
-    ];
+  return (
+    <div className="experience">
+      <ol className="exp-list">
+        {experiences.map((exp, index) => (
+          <li key={index} className={`exp-item ${exp.current ? "current" : ""}`}>
+            <div className="exp-card">
+              <div className="exp-head">
+                <div>
+                  <h3 className="exp-title">{exp.title}</h3>
+                  <p className="exp-company">
+                    {exp.company}
+                    <span className="exp-loc"> · {exp.location}</span>
+                  </p>
+                </div>
+                <div className="exp-date-wrap">
+                  {exp.current && <span className="exp-current">Current</span>}
+                  <span className="exp-date">{exp.date}</span>
+                </div>
+              </div>
 
-    return (
-        <div className="experience">
-            <div className="experience-list">
-                {experiences.map((exp, index) => (
-                    <div key={index} className="experience-item">
-                        <div className="timeline-line"></div>
-                        <div className="experience-content">
-                            <h3 className="title">{exp.title}</h3>
-                            <p className="company">{exp.company}</p>
-                            <p className="date">{exp.date}</p>
-                            <ul>
-                                {exp.points.map((point, i) => (
-                                    <li key={i}>{point}</li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Technology Stack Inside the Box */}
-                        <div className="tech-stack">
-                            {exp.technologies.map((tech, i) => (
-                                <div key={i} className="tech-box">
-                                    <img src={tech.logo} alt={tech.name} className="tech-logo" />
-                                    <span className="tech-name">{tech.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+              <ul className="exp-points">
+                {exp.points.map((point, i) => (
+                  <li key={i}>{point}</li>
                 ))}
+              </ul>
+
+              <div className="tech-row exp-tech">
+                {exp.tech.map((name) => (
+                  <span key={name} className="tech-chip">
+                    {TECH_ICONS[name] && <img src={TECH_ICONS[name]} alt="" aria-hidden="true" />}
+                    {name}
+                  </span>
+                ))}
+              </div>
             </div>
-        </div>
-    );
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
 };
 
 export default Experience;

@@ -1,83 +1,87 @@
-/* Default (Desktop) Layout */
-.hamburger-container {
+.menu {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 0vw 0vw 0vw 5vw;
+    flex: none;
 }
 
 .hamburger {
-    width: calc(1.5vw + 4vh);
-    height: calc(1.5vw + 3vh);
+    width: clamp(2.4rem, 5vw, 3.4rem);
+    height: clamp(1.8rem, 3.5vw, 2.6rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    padding: 0;
+    background: none;
+    border: 0;
 
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-
-    transition: all 0.5s ease-in-out;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+/* when open, let clicks fall through to the menu links it frames */
+.hamburger.open {
+    pointer-events: none;
 }
 
 .line {
     width: 100%;
-    height: calc(0.2vw + 0.2vh);
-    background-color: white;
-    border-radius: 5vw;
-    transition: all 0.5s ease-in-out;
-    pointer-events: none;
-}
-
-.side-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
-    justify-items: center;
-
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    pointer-events: none;
-}
-.side-menu.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-.side-menu.hidden {
-    opacity: 0;
+    height: 2px;
+    background-color: var(--heading);
+    border-radius: 100px;
+    transition: transform 0.45s var(--ease), opacity 0.3s ease;
     pointer-events: none;
 }
 
 .hamburger.open .top {
     transform: translateY(calc(-1 * var(--line-move)));
 }
-
 .hamburger.open .bottom {
     transform: translateY(var(--line-move));
 }
-
 .hamburger.open .middle {
     opacity: 0;
 }
 
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.side-menu.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .menu-link {
-    font-size: calc(1.2vw + 1.5vh);
-    text-decoration: none;
-    color: white;
+    font: inherit;
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    font-weight: 300;
+    color: var(--text);
+    background: none;
+    border: 0;
+    padding: 0.1rem 0.4rem;
+    cursor: pointer;
     text-align: center;
-    font-weight: 200;
+    transform-origin: center;
+    transition: color 0.16s ease, transform 0.1s linear;
 }
-
 .menu-link:hover {
-    text-decoration: underline;
+    color: var(--accent-link);
 }
 
-/* Mobile (Column Layout) */
 @media (max-width: 640px) {
-    .hamburger-container {
-        margin: 0px;
+    .menu {
+        margin: 0;
     }
 }

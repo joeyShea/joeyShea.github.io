@@ -1,62 +1,157 @@
-/* Default (Desktop) Layout */
 .education {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 4vw;
-    margin-top: 3vw;
+    gap: 1.75rem;
 }
 
-.raikes {
+.edu-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: clamp(1.25rem, 2.5vw, 2rem);
     display: flex;
-    justify-content: space-between;
-}
-.raikes img {
-    width: 20vw;
-    height: 20vw;
-    background-color: white;
-    border-radius: 1vw;
-    padding: 1vw;
-    margin-top: 1vw;
+    flex-direction: column;
+    gap: 1.4rem;
 }
 
-.text {
-    line-height: 1.5;
-    margin-bottom: 1vw;
+.edu-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
+.edu-logo {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.5rem;
+    height: 6.5rem;
+    background: #fff;
+    border-radius: var(--r-sm);
+    padding: 0.75rem;
+}
+.edu-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.edu-school {
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    font-weight: 600;
+    line-height: 1.15;
+}
+.edu-program {
+    margin-top: 0.3rem;
+    font-size: 0.98rem;
+    color: var(--accent-link);
+    font-weight: 500;
+}
+
+.edu-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+}
+.chip-accent {
+    color: var(--accent);
+    border-color: rgba(10, 156, 255, 0.32);
+    background: var(--accent-soft);
+    font-weight: 600;
+}
+
+.edu-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 72ch;
+}
+.edu-points li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text);
+}
+.edu-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--accent);
+}
+
+.edu-honors {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+/* ---------- Buttons (shared look) ---------- */
 .download-buttons {
-    margin-top: calc(2vw + 0.5vh);
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     justify-content: center;
 }
-
-.download-btn {
-    padding: 10px 15px;
-    background-color: #0095ff;
-    color: white;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--r-xs);
+    border: 1px solid transparent;
+    transition: transform 0.16s var(--ease), background 0.16s ease, border-color 0.16s ease;
+}
+.btn:hover {
     text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.2s ease-in-out;
+    transform: translateY(-1px);
+}
+.btn-primary {
+    background: var(--accent-solid);
+    color: #fff;
+    border-color: var(--accent-solid);
+}
+.btn-primary:hover {
+    background: var(--accent-solid-hover);
+    border-color: var(--accent-solid-hover);
+    color: #fff;
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line-strong);
+}
+.btn-ghost:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--heading);
 }
 
-.download-btn:hover {
-    background-color: #0086e6;
-}
-
-/* Mobile (Column Layout) */
+/* ---------- Mobile ---------- */
 @media (max-width: 640px) {
-    .raikes {
+    .edu-header {
         flex-direction: column;
+        text-align: center;
         align-items: center;
     }
-    .raikes img {
-        width: 60vw;
-        height: 60vw;
+    .edu-facts {
+        justify-content: center;
     }
-    .text h3 {
-        text-align: center;
+    .download-buttons {
+        flex-direction: column;
+    }
+    .btn {
+        justify-content: center;
     }
 }

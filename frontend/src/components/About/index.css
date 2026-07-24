@@ -1,54 +1,116 @@
-/* Default (Desktop) Layout */
 .about {
-    display: flex;
-    flex-direction: row;
-    gap: 3vw;
-    margin-top: 5vw;
-    margin-bottom: 5vw;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
 }
 
-ul li {
-    margin-bottom: calc(1vh + 0.5vw);
-    color: #c8c8c8;
+/* ---------- Photo ---------- */
+.about-photo {
+    position: relative;
+    flex: none;
+    justify-self: center;
+    /* keep the portrait optically level with the prose rather than pinned to the top */
+    align-self: center;
 }
-a {
-    color: white;
+/* offset accent frame behind the portrait — a small thoughtful detail */
+.about-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translate(0.85rem, 0.85rem);
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.35;
+    pointer-events: none;
 }
 .me-photo {
-    width: 25vw;
-    height: 25vw;
-    border-radius: 100vw;
-    border: 0.3vw solid #0095ff;
-    background: #191919;
-    margin-left: 3vw;
+    display: block;
+    width: clamp(11rem, 20vw, 16rem);
+    height: clamp(11rem, 20vw, 16rem);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    background: var(--surface-2);
+    position: relative;
 }
 
-.text {
-    width: 50vw;
-    font-size: 1.5vw;
-    color: #c8c8c8;
-    font-weight: 300;
-    margin-top: 0.5vw;
+/* ---------- Body ---------- */
+.about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
 }
 
-/* Mobile (Column Layout) */
-@media (max-width: 640px) {
-    .me-photo {
-        width: 60vw;
-        height: 60vw;
-        margin-left: 0vw;
-    }
+.about-lead {
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--heading);
+    font-weight: 400;
+    max-width: 60ch;
+}
 
+.about-facts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 62ch;
+}
+.about-facts li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+.about-facts li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--accent);
+}
+
+/* Inline prose links must not rely on colour alone to be distinguishable */
+.about-facts a,
+.about-lead a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(92, 180, 255, 0.5);
+}
+.about-facts a:hover,
+.about-lead a:hover {
+    text-decoration-color: currentColor;
+}
+
+.about-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.strength-chip {
+    background: transparent;
+    border-color: var(--line-strong);
+    color: var(--muted);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
     .about {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
     }
-
-    .text {
-        width: 80vw;
-        font-size: 2vh;
-        color: #c8c8c8;
-        margin-bottom: 5vh;
+    .about-photo {
+        justify-self: center;
+    }
+    .about-lead {
+        text-align: center;
     }
 }

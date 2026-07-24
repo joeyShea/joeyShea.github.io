@@ -1,58 +1,95 @@
 import { useEffect, useRef } from "react";
 
+const HEIGHT = 200;
+
 const SineWave = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  let phase = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = 200;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let phase = 0;
+    let rafId = 0;
+    let running = false;
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      canvas.width = width * dpr;
+      canvas.height = HEIGHT * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    const drawWave = () => {
-      if (!ctx || !canvas) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Two layered waves: a bright foreground and a fainter, slower one for depth.
+    const drawWave = (amplitude: number, frequency: number, color: string, lineWidth: number, shift: number) => {
       ctx.beginPath();
-
-      const amplitude = 20; // height
-      const frequency = 0.02; // frequency
-      const speed = -1; // speed
-      const yOffset = canvas.height / 2;
-
-      ctx.moveTo(0, yOffset);
-      const waveOffset = 50;
-
-      for (let x = -waveOffset; x < canvas.width; x++) {
-        const y = yOffset + amplitude * Math.sin(x * frequency + phase);
-        ctx.lineTo(x, y);
+      const yOffset = HEIGHT / 2;
+      for (let x = -60; x <= width; x++) {
+        const y = yOffset + amplitude * Math.sin(x * frequency + phase + shift);
+        if (x === -60) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
       }
-
-      ctx.strokeStyle = "#0095ff";
-      ctx.lineWidth = 5;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
       ctx.stroke();
-
-      phase += speed * 0.01;
-
-      requestAnimationFrame(drawWave);
     };
 
-    drawWave();
+    const render = () => {
+      ctx.clearRect(0, 0, width, HEIGHT);
+      drawWave(10, 0.018, "rgba(10, 156, 255, 0.28)", 3, 1.6);
+      drawWave(20, 0.02, "#0a9cff", 4, 0);
+    };
 
-    return () => window.removeEventListener("resize", resizeCanvas);
+    const loop = () => {
+      phase -= 0.01;
+      render();
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const start = () => {
+      if (running || reduceMotion) return;
+      running = true;
+      rafId = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+    };
+
+    resize();
+    render();
+    window.addEventListener("resize", resize);
+
+    // Only animate while the canvas is on-screen and the tab is visible.
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting && !document.hidden ? start() : stop()),
+      { threshold: 0 }
+    );
+    io.observe(canvas);
+
+    const onVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      stop();
+      io.disconnect();
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", display: "block"}} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      style={{ width: "100%", height: `${HEIGHT}px`, display: "block" }}
+    />
+  );
 };
 
 export default SineWave;

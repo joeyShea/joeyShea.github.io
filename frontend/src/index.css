@@ -1,46 +1,208 @@
-/* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+/* ============================================================
+   Design tokens
+   ============================================================ */
 :root {
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    justify-content: center;
-    background-color: #000000;
+    /* Surfaces */
+    --bg: #000000;
+    --surface: #141414;
+    --surface-2: #1c1c1c;
+    --surface-3: #242424;
+
+    /* Hairlines & frame */
+    --line: rgba(255, 255, 255, 0.09);
+    --line-strong: rgba(255, 255, 255, 0.16);
+    --frame: rgba(255, 255, 255, 0.82);
+
+    /* Text */
+    --heading: #ffffff;
+    --text: #e6e6e6;
+    --muted: #a9a9a9;
+    --muted-dim: #868686;
+
+    /* Accent (AA-checked: bright blue for borders/display + large text,
+       lighter blue for small inline links, deep blue for solid fills w/ white text) */
+    --accent: #0a9cff;
+    --accent-link: #5cb4ff;
+    --accent-solid: #0067c0;
+    --accent-solid-hover: #0079dd;
+    --accent-soft: rgba(10, 156, 255, 0.12);
+
+    /* Radii — a deliberate scale rather than one big blob everywhere */
+    --r-xs: 6px;
+    --r-sm: 10px;
+    --r-md: 14px;
+    --r-lg: 20px;
+
+    /* Layout */
+    --maxw: 1180px;
+    --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+
+    /* Motion */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+    font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: dark;
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 html {
     margin: 0;
-    width: 98vw;
-    min-height: 100vh;
+    background-color: var(--bg);
     overscroll-behavior-y: none;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-    margin: 0;
-    width: 90%;
+    margin: 0 auto;
+    max-width: var(--maxw);
     min-height: 100vh;
-    background-color: black;
-    outline: 0.3vw white solid;
-    overscroll-behavior-y: none;
+    background-color: var(--bg);
+    color: var(--text);
+    /* Framed-card identity, refined to a crisp hairline that respects layout width */
+    border: 1.5px solid var(--frame);
+    overflow-x: hidden;
 }
 
-.banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 165, 0, 0.5);
-    color: white;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 1vw 0vw 1vw 0vw;
-    font-weight: bold;
-    z-index: 1000;
+/* ============================================================
+   Base elements
+   ============================================================ */
+h1, h2, h3, h4 {
+    color: var(--heading);
+    margin: 0;
+    text-wrap: balance;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    color: var(--accent-link);
+    text-decoration: none;
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+}
+
+a:hover {
+    color: #8ccaff;
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+}
+
+::selection {
+    background: rgba(10, 156, 255, 0.35);
+    color: #fff;
+}
+
+/* Visible, consistent keyboard focus (accessibility) */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* Thin custom scrollbars for inner scroll regions */
+.scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 100px;
+}
+
+/* ============================================================
+   Reusable pieces
+   ============================================================ */
+
+/* Eyebrow: small mono-ish label used above section titles + on cards */
+.eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-link);
+    font-feature-settings: "tnum";
+}
+
+/* Pills / chips */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.28rem 0.66rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 100px;
 }
 
 @media (max-width: 640px) {
     body {
-        width: 100%;
-        outline: none;
+        max-width: 100%;
+        border: none;
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ============================================================
+   Shared tech chips (used by Experience + Projects)
+   ============================================================ */
+.tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.34rem 0.72rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+.tech-chip:hover {
+    border-color: var(--line-strong);
+    background: var(--surface-3);
+}
+.tech-chip img {
+    width: 1.05em;
+    height: 1.05em;
+    display: block;
 }

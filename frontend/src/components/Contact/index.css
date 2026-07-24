@@ -1,94 +1,92 @@
-/* Default (Desktop) Layout */
 .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-top: 2vw;
+    gap: 1.5rem;
 }
 
-.note {
-    font-size: 1.5vw;
-    color: white;
+.contact-lead {
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    color: var(--heading);
+    font-weight: 400;
+    max-width: 40ch;
+    line-height: 1.5;
+}
+
+.contact-email-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.contact-email {
+    font: inherit;
+    font-size: clamp(1.05rem, 2.6vw, 1.6rem);
     font-weight: 500;
-    margin-top: 1vw;
-}
-
-.contact p {
-    font-size: 1.5vw;
-    color: white;
-    font-weight: 300;
-}
-
-.copyable {
+    color: var(--heading);
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
     cursor: pointer;
-    color: white;
-    font-weight: bold;
-    margin-left: 5px;
-    transition: color 0.2s ease-in-out;
+    transition: border-color 0.18s ease, color 0.18s ease;
+}
+.contact-email:hover {
+    color: var(--accent-link);
+    border-color: var(--accent);
 }
 
-.copyable:hover {
-    color: #0095ff;
+.contact-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--r-xs);
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    transition: color 0.16s ease, border-color 0.16s ease;
 }
-
-.copy-notification {
-    position: fixed;
-    bottom: calc(2vw + 1vh);
-    right: calc(2vw + 2vh);
-    background: rgba(255, 255, 255, 1);
-    color: #0095ff;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: calc(1vw + 1vh);
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.copy-notification:not(:empty) {
-    animation: fadeOut 2s ease-in-out forwards;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+.contact-copy:hover {
+    color: var(--text);
+    border-color: var(--line-strong);
 }
 
 .social-icons {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    text-decoration: none;
+    gap: 1rem;
+    margin-top: 0.25rem;
+}
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    transition: color 0.18s ease, border-color 0.18s ease, transform 0.18s var(--ease);
+}
+.social-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
-.icon {
-    color: #0095ff;
-    transition: transform 0.2s ease-in-out, color 0.3s ease;
-    text-decoration: none;
-    font-size: 4vw;
-}
-
-.icon:hover {
-    transform: scale(1.2);
-}
-
-/* Mobile (Column Layout) */
 @media (max-width: 640px) {
-    .note {
-        font-size: 2vh;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-
-    .contact p {
-        font-size: 2vh;
-    }
-    .icon {
-        font-size: 4vh;
+    .social-link {
+        width: 3.25rem;
+        height: 3.25rem;
+        font-size: 1.6rem;
     }
 }

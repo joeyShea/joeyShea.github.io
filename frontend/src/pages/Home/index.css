@@ -1,108 +1,172 @@
-/* Default (Desktop) Layout */
 #root {
     display: flex;
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+    padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+/* ============================================================
+   Hero — fills the first viewport, wave anchored to the bottom
+   ============================================================ */
+.hero {
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
+    flex-direction: column;
+    /* lift the wave off the very bottom so it reads as composed, not pinned */
+    padding-bottom: clamp(1.5rem, 7vh, 5.5rem);
+}
+
+.head-section {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    padding-bottom: 5vw;
+    justify-content: center;
+    gap: clamp(1rem, 4vw, 4rem);
+    /* extra top padding drops the name group toward center, tastefully
+       above dead-centre rather than pinned high above the wave */
+    padding: clamp(3rem, 13vh, 9rem) var(--pad-x) 0;
 }
 
 .home-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1vw;
+    text-align: center;
 }
 
-.head-section {
-    display: flex;
-    flex-direction: row;
-    margin-top: 25vh;
-    margin-bottom: 5vh;
-}
 
 .my-name {
-    color: white;
-    font-size: 8vw;
+    color: var(--heading);
+    font-size: clamp(3rem, 8.5vw, 7.5rem);
+    line-height: 0.95;
     white-space: nowrap;
     font-weight: 300;
-    margin: 0vw 0vw -1vw 0vw;
-    transform: translateY(-100vh);
-    animation: dropDown 0.5s cubic-bezier(0.15, 1, 0.3, 1) 0.8s forwards;
+    letter-spacing: -0.01em;
+    margin: 0;
+    /* opacity stays 1 so the name is a valid LCP candidate from the first frame;
+       a modest in-viewport drop keeps the entrance without hurting LCP */
+    transform: translateY(-2.5rem);
+    animation: dropDown 0.6s var(--ease) 0.05s both;
 }
 .my-name span {
-    color: #0095ff;
-    font-weight: 500;
+    color: var(--accent);
+    font-weight: 600;
 }
+
 @keyframes dropDown {
-    0% {
-        transform: translateY(-100vh);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    0% { transform: translateY(-2.5rem); }
+    100% { transform: translateY(0); }
+}
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(0.6rem); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .summary {
-    color: #c0c0c0;
-    font-size: calc(0.5vw + 1.5vh);
-    margin: 0vw;
+    color: var(--muted);
+    font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+    margin: 0.9rem 0 0;
     font-weight: 400;
-    text-transform: uppercase;
-    text-align: center;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    animation: fadeUp 0.6s var(--ease) 0.5s both;
 }
 
-section {
-    width: 100vw;
-    height: 10vh;
-    text-align: center;
-
-    color: white;
-    font-size: calc(2vw + 3vh);
-    text-transform: uppercase;
-    font-weight: 400;
-    margin: 10vh 0vh 0vh 0vh;
+.hero-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: 0.85rem;
+    font-size: clamp(0.78rem, 1.4vw, 0.98rem);
+    font-weight: 500;
+    color: var(--text);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: var(--surface);
+    opacity: 0;
+    animation: fadeUp 0.6s var(--ease) 0.65s both;
+}
+.hero-role .sep { color: var(--muted-dim); }
+.hero-role .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2fd27a;
+    box-shadow: 0 0 0 3px rgba(47, 210, 122, 0.18);
+    flex: none;
 }
 
-.section-content {
-    width: 90vw;
-    margin-top: 5vw;
-    margin-bottom: 5vw;
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+main {
     display: flex;
     flex-direction: column;
 }
 
-.spacer {
-    height: 10vw;
+.section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(3.5rem, 8vh, 6.5rem) var(--pad-x) 0;
+    scroll-margin-top: 90px;
 }
 
-/* Mobile (Column Layout) */
+.section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+.section-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.section-num {
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+}
+.section-num::after {
+    content: "";
+    display: inline-block;
+    width: 2.2rem;
+    height: 1px;
+    background: var(--line-strong);
+    vertical-align: middle;
+    margin-left: 0.75rem;
+}
+.section-kicker {
+    color: var(--muted);
+    letter-spacing: 0.18em;
+}
+
+.section-title {
+    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 1;
+}
+
+/* ============================================================
+   Mobile
+   ============================================================ */
 @media (max-width: 640px) {
     .head-section {
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top: 10vh;
+        gap: 1.5rem;
     }
-
     .my-name {
-        font-size: 22vw;
-        line-height: 0.95;
-        margin-right: 0;
-        margin-top: 20vw;
-        text-align: center;
-        white-space: pre-line;
+        font-size: clamp(3.5rem, 19vw, 6rem);
+        white-space: normal;
     }
-    .summary {
-        font-size: 4vw;
-        width: 75vw;
-        font-weight: 400;
-        text-transform: uppercase;
-        margin-bottom: 10vh;
-        margin-top: 3vh;
+    .section {
+        scroll-margin-top: 70px;
     }
 }

@@ -1,152 +1,158 @@
-/* Default (Desktop) Layout */
 .experience {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3vw;
-    padding: 3vw 0px 3vw 0px;
+    width: 100%;
 }
 
-.experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.experience-item {
-    display: flex;
-    align-items: stretch;
+.exp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     position: relative;
-    background: #191919;
-    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
 }
 
-.timeline-line {
-    width: 2px;
-    background-color: #0095ff;
+/* Timeline item: marker + connecting rail on the left */
+.exp-item {
+    position: relative;
+    padding-left: 2.1rem;
+}
+.exp-item::before {
+    /* rail */
+    content: "";
     position: absolute;
-    left: 1rem;
-    top: 1vw;
-    bottom: 1vw;
+    left: 5px;
+    top: 0.55rem;
+    bottom: -1.25rem;
+    width: 1px;
+    background: var(--line);
+}
+.exp-item:last-child::before {
+    bottom: auto;
+    height: 0;
+}
+.exp-item::after {
+    /* marker */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--muted-dim);
+}
+.exp-item.current::after {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
-.experience-content {
-    padding: 1.5rem;
-    margin-left: 3rem;
-    width: 70%;
+.exp-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+    transition: border-color 0.2s ease;
+}
+.exp-item.current .exp-card {
+    border-color: rgba(10, 156, 255, 0.28);
+}
+.exp-card:hover {
+    border-color: var(--line-strong);
+}
+
+.exp-head {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
-    position: relative;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
 }
 
-.tech-stack {
+.exp-title {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.2;
+}
+.exp-company {
+    margin-top: 0.25rem;
+    font-size: 0.98rem;
+    color: var(--accent-link);
+    font-weight: 500;
+}
+.exp-loc {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.exp-date-wrap {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    padding: 1.5rem 1.5rem 1.5rem 0;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    gap: 0.35rem;
+    flex: none;
+    text-align: right;
 }
-
-.title {
-    font-size: 2rem;
-    font-weight: 400;
-    color: white;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
+.exp-date {
+    font-size: 0.82rem;
+    color: var(--muted);
+    white-space: nowrap;
+}
+.exp-current {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(10, 156, 255, 0.3);
+    padding: 0.18rem 0.55rem;
+    border-radius: 100px;
+    white-space: nowrap;
 }
 
-.company {
-    font-size: 1.2rem;
-    color: #c0c0c0;
-}
-
-.date {
-    font-size: 1rem;
-    color: #c0c0c0;
-    margin-bottom: 1rem;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-li {
-    font-size: 1rem;
-    color: #c0c0c0;
-    margin-bottom: 0.5rem;
-}
-
-.tech-box {
-    width: 30%;
-    height: 4rem;
+.exp-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background: #252525;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    cursor: pointer;
-    text-align: center;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.exp-points li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--text);
+}
+.exp-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--accent);
 }
 
-.tech-box:hover {
-    transform: scale(1.1);
+.exp-tech {
+    margin-top: 1.1rem;
 }
 
-.tech-logo {
-    width: 2.2rem;
-    height: 2.2rem;
-    margin-bottom: 0.3rem;
-}
-
-.tech-name {
-    font-size: 1rem;
-    color: white;
-}
-
-/* Mobile (Column Layout) */
+/* ---------- Mobile ---------- */
 @media (max-width: 640px) {
-    .experience-item {
+    .exp-head {
         flex-direction: column;
+        gap: 0.6rem;
     }
-
-    .experience-content {
-        width: calc(100% - 30px);
-        margin-left: 30px;
-        padding: 1.5rem 1.5rem 1.5rem 0;
-    }
-
-    .tech-stack {
+    .exp-date-wrap {
         flex-direction: row;
-        width: calc(90%);
-        padding: 0 1.5rem 1.5rem 0;
-        margin-left: 30px;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
-    }
-
-    .tech-box {
-        width: 30%;
-        height: 3.5rem;
-    }
-
-    .title {
-        font-size: 1.2rem;
-        color: white;
-    }
-
-    .company,
-    .date,
-    li {
-        font-size: 0.9rem;
-        color: #c0c0c0;
+        align-items: center;
+        text-align: left;
     }
 }
