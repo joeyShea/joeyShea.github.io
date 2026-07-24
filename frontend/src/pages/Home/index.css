@@ -109,11 +109,14 @@ main {
 }
 
 .section {
+    --section-pad-top: clamp(3.5rem, 8vh, 6.5rem);
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: clamp(3.5rem, 8vh, 6.5rem) var(--pad-x) 0;
-    scroll-margin-top: 90px;
+    padding: var(--section-pad-top) var(--pad-x) 0;
+    /* cancel the section's own top padding so nav scrolls land the
+       header just below the viewport top, with a small breathing gap */
+    scroll-margin-top: calc(1.5rem - var(--section-pad-top));
 }
 
 .section-head {
@@ -165,8 +168,5 @@ main {
     .my-name {
         font-size: clamp(3.5rem, 19vw, 6rem);
         white-space: normal;
-    }
-    .section {
-        scroll-margin-top: 70px;
     }
 }

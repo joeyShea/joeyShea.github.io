@@ -25,6 +25,7 @@ type Project = {
   timeframe: string;
   role?: string;
   category: string;
+  featured?: boolean;
   status?: "live" | "building" | "shipped";
   highlights: string[];
   tech: string[];
@@ -55,8 +56,8 @@ const TECH_ICONS: Record<string, string> = {
 };
 
 // Category order controls how the selector groups render (strongest first).
+// Featured projects are pulled out into their own pinned group up top.
 const CATEGORY_ORDER = [
-  "Featured",
   "AI & Agents",
   "Full-Stack",
   "Tools & Data",
@@ -67,7 +68,8 @@ const projects: Project[] = [
   {
     id: "grafle",
     title: "Grafle",
-    category: "Featured",
+    category: "Full-Stack",
+    featured: true,
     status: "live",
     timeframe: "2025 – Present",
     role: "Solo project",
@@ -91,6 +93,7 @@ const projects: Project[] = [
     id: "cue",
     title: "Cue",
     category: "AI & Agents",
+    featured: true,
     status: "live",
     timeframe: "2025 – Present",
     role: "Solo project",
@@ -166,6 +169,7 @@ const projects: Project[] = [
     id: "stringg",
     title: "Stringg",
     category: "Full-Stack",
+    featured: true,
     status: "live",
     timeframe: "2025",
     role: "Solo project",
@@ -546,54 +550,83 @@ const ImageViewer = ({
 const Projects = () => {
   const [selectedId, setSelectedId] = useState<string>(projects[0].id);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
 
   const selected = projects.find((p) => p.id === selectedId) ?? projects[0];
 
-  // Group projects by category, preserving the intended category order.
+  // Featured projects sit pinned and always visible up top; the rest group
+  // by category into collapsed-by-default sections.
+  const featured = projects.filter((p) => p.featured);
   const grouped = CATEGORY_ORDER.map((cat) => ({
     category: cat,
-    items: projects.filter((p) => p.category === cat),
+    items: projects.filter((p) => p.category === cat && !p.featured),
   })).filter((g) => g.items.length > 0);
+
+  const toggleGroup = (category: string) =>
+    setOpenGroups((s) => ({ ...s, [category]: !s[category] }));
 
   const images = selected.images ?? [];
   const closeViewer = useCallback(() => setViewerIndex(null), []);
+
+  const renderTab = (project: Project) => (
+    <button
+      key={project.id}
+      type="button"
+      className={`proj-tab ${selected.id === project.id ? "active" : ""}`}
+      aria-pressed={selected.id === project.id}
+      onClick={() => setSelectedId(project.id)}
+    >
+      <span className="proj-tab-name">{project.title}</span>
+      {project.status === "live" && (
+        <span className="proj-live" aria-label="Live">
+          <span className="proj-live-dot" />
+          Live
+        </span>
+      )}
+    </button>
+  );
 
   return (
     <div className="projects">
       {/* Selector */}
       <nav className="proj-selector scroll-thin" aria-label="Project list">
-        {grouped.map(({ category, items }) => (
-          <div key={category} className="proj-group">
-            <p className="proj-group-title">{category}</p>
-            {items.map((project) => (
+        <div className="proj-group">
+          <p className="proj-group-title">Featured</p>
+          {featured.map(renderTab)}
+        </div>
+
+        {grouped.map(({ category, items }) => {
+          const open = !!openGroups[category];
+          const holdsActive = items.some((p) => p.id === selected.id);
+          return (
+            <div key={category} className={`proj-group ${open ? "open" : ""}`}>
               <button
-                key={project.id}
                 type="button"
-                className={`proj-tab ${selected.id === project.id ? "active" : ""}`}
-                aria-pressed={selected.id === project.id}
-                onClick={() => setSelectedId(project.id)}
+                className="proj-group-head"
+                aria-expanded={open}
+                onClick={() => toggleGroup(category)}
               >
-                <span className="proj-tab-name">{project.title}</span>
-                {project.status === "live" && (
-                  <span className="proj-live" aria-label="Live">
-                    <span className="proj-live-dot" />
-                    Live
-                  </span>
+                <span className="proj-group-name">{category}</span>
+                {!open && holdsActive && (
+                  <span className="proj-group-active-dot" aria-hidden="true" />
                 )}
+                <span className="proj-group-count">{items.length}</span>
+                <FiChevronRight className="proj-group-chevron" aria-hidden="true" />
               </button>
-            ))}
-          </div>
-        ))}
+              <div className="proj-group-body">
+                <div className="proj-group-list">{items.map(renderTab)}</div>
+              </div>
+            </div>
+          );
+        })}
       </nav>
 
       {/* Detail */}
-      <article className="proj-detail" key={selected.id}>
+      <article className="proj-detail scroll-thin" key={selected.id}>
         <div className="proj-detail-main">
           <div className="proj-detail-head">
             <div className="proj-detail-heading">
-              {selected.category !== "Featured" && (
-                <p className="eyebrow">{selected.category}</p>
-              )}
+              <p className="eyebrow">{selected.category}</p>
               <h3 className="proj-title">{selected.title}</h3>
             </div>
             {selected.links && selected.links.length > 0 && (

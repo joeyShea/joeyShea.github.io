@@ -1,4 +1,7 @@
 .projects {
+    /* both panels cap at one viewport minus the section header above them,
+       so the whole Projects section always fits a single screen */
+    --proj-max-h: calc(100vh - 11rem);
     display: grid;
     grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
     gap: 1.25rem;
@@ -17,7 +20,7 @@
     border-radius: var(--r-md);
     position: sticky;
     top: 1.5rem;
-    max-height: calc(100vh - 3rem);
+    max-height: var(--proj-max-h);
     overflow-y: auto;
 }
 
@@ -35,6 +38,80 @@
     color: var(--muted-dim);
     padding: 0 0.55rem 0.35rem;
     margin: 0;
+}
+
+/* Collapsible category header — same voice as the group title, plus a
+   count and a chevron that rotates open */
+.proj-group-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    font: inherit;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+    background: transparent;
+    border: 0;
+    border-radius: var(--r-xs);
+    padding: 0.4rem 0.55rem;
+    cursor: pointer;
+    transition: color 0.16s ease, background 0.16s ease;
+}
+.proj-group-head:hover {
+    color: var(--muted);
+    background: var(--surface-2);
+}
+.proj-group-name {
+    flex: 1;
+    text-align: left;
+}
+.proj-group-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5em;
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--muted);
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+}
+.proj-group-chevron {
+    font-size: 0.85rem;
+    flex: none;
+    transition: transform 0.22s var(--ease);
+}
+.proj-group.open .proj-group-chevron {
+    transform: rotate(90deg);
+}
+/* marks a collapsed group that holds the currently selected project */
+.proj-group-active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+}
+
+/* collapse animation: the body is a grid that eases 0fr -> 1fr */
+.proj-group-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s var(--ease);
+}
+.proj-group.open .proj-group-body {
+    grid-template-rows: 1fr;
+}
+.proj-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .proj-tab {
@@ -86,6 +163,7 @@
 
 /* ---------- Detail ---------- */
 .proj-detail {
+    --proj-detail-pad: clamp(1.25rem, 2.5vw, 2rem);
     display: grid;
     /* write-up on the left, a rail for gallery + skills on the right, so the
        panel tracks the selector's height instead of running far past it */
@@ -95,8 +173,11 @@
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--r-md);
-    padding: clamp(1.25rem, 2.5vw, 2rem);
+    padding: var(--proj-detail-pad);
     min-width: 0;
+    /* long write-ups scroll inside the panel instead of growing the page */
+    max-height: var(--proj-max-h);
+    overflow-y: auto;
     animation: projIn 0.4s var(--ease);
 }
 .proj-detail-main {
@@ -216,10 +297,10 @@
     align-self: stretch;
     min-width: 0;
 }
-/* stays in view while a long write-up scrolls past */
+/* stays in view while a long write-up scrolls past inside the panel */
 .proj-aside-sticky {
     position: sticky;
-    top: 1.5rem;
+    top: var(--proj-detail-pad);
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
@@ -454,6 +535,18 @@
     .proj-group {
         flex: none;
     }
+    /* the horizontal strip has no room for accordions — force groups open
+       and turn their headers back into plain labels */
+    .proj-group-head {
+        pointer-events: none;
+    }
+    .proj-group-chevron,
+    .proj-group-active-dot {
+        display: none;
+    }
+    .proj-group-body {
+        grid-template-rows: 1fr;
+    }
     .proj-tab {
         white-space: nowrap;
     }
@@ -464,6 +557,8 @@
     /* stack the write-up and its rail; the rail is too narrow here */
     .proj-detail {
         grid-template-columns: minmax(0, 1fr);
+        max-height: none;
+        overflow-y: visible;
     }
     .proj-aside-sticky {
         position: static;
