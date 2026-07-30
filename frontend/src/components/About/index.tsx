@@ -33,14 +33,13 @@ const About = () => {
             in Kansas.
           </li>
           <li>
-            A fascination with technology led me to the{" "}
+            My fascination with technology led me to the{" "}
             <a href="https://raikes.unl.edu/" target="_blank" rel="noopener noreferrer">
               Raikes School
             </a>{" "}
             of Computer Science &amp; Management at UNL.
           </li>
-          <li>Now entering my senior year, building agentic and LLM-powered tools on my capstone and on the side.</li>
-          <li>Happiest contributing to real projects and learning as I go.</li>
+          <li>Now entering my senior year (the last three flew by).</li>
         </ul>
 
         <div className="about-block">

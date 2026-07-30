@@ -37,12 +37,10 @@ const Education = () => {
 
         <ul className="edu-points">
           <li>
-            The Raikes School is a selective (~40 students/year) interdisciplinary program that pairs
-            advanced computer science with business, leadership, and team-based design studios.
+            The Raikes School is a selective (~40 students/year) interdisciplinary program that pairs advanced computer science with business, leadership, and team-based design studios.
           </li>
           <li>
-            Coursework spans software engineering, machine learning, statistics, and economics — plus
-            hands-on business and product work.
+            Coursework covers software engineering, machine learning, statistics, and economics + hands-on business and product work.
           </li>
         </ul>
 

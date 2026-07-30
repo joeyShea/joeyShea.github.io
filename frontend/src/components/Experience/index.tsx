@@ -28,10 +28,10 @@ const experiences: Experience[] = [
     date: "May 2026 – Present",
     current: true,
     points: [
-      "Built a cloud-infrastructure reconciliation engine that identifies orphaned resources across the platform and improves overall visibility.",
+      "Deployed a cloud infrastructure reconciliation system using Temporal workflows and Spring Boot, integrating with Garmin's core cloud platform to automatically detect orphaned resources across thousands of instances, volumes, and network resources.",
       "Refactored OpenStack provider layer into a structured, typed API, replacing raw SDK object usage to improve reliability for Temporal-based workflows.",
     ],
-    tech: ["Temporal", "Spring Boot", "Python", "Pydantic"],
+    tech: ["Temporal", "Java", "Spring Boot", "Python", "Pydantic"],
   },
   {
     title: "RAIK 183H Teaching Assistant",

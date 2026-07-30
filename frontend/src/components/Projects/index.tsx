@@ -70,12 +70,12 @@ const projects: Project[] = [
     timeframe: "2025 – Present",
     role: "Solo project",
     tagline:
-      "A free game that teaches you to recognize the world's languages and writing systems at a glance — built for GeoGuessr players who navigate by the signage.",
+      "A free game that teaches you to recognize the world's languages and writing systems.",
     highlights: [
-      "Three-stage rounds — read the script, name the language, then place it on the map — spanning 71 languages, 6 script families, and ~90 hand-written confusion notes that teach on every miss.",
-      "Deterministic daily challenge with streaks and a Wordle-style shareable grid, plus practice modes from Easy to Expert.",
-      "A data-integrity validator gates every build: sample text must fall ≥80% inside a script's Unicode ranges, catching wrong-language errors mechanically.",
-      "Ships with zero third-party runtime requests; an optional Supabase backend layers on global leaderboards and cross-device streaks.",
+      "Several round types where you read a script, name the language, then place it on the map.",
+      "Spans 71 languages, 6 script families, and dozens of confusion notes that help you learn from your mistakes.",
+      "Daily challenge with streaks and a Wordle-style shareable grid, plus practice modes from Easy to Expert.",
+      "Originally made for GeoGuessr players are interested in navigating by local signage."
     ],
     tech: ["React", "Vite", "Leaflet", "Supabase", "JavaScript"],
     links: [{ label: "Play Grafle", href: "https://grafle.xyz", kind: "live" }],
@@ -94,11 +94,10 @@ const projects: Project[] = [
     timeframe: "2025 – Present",
     role: "Solo project",
     tagline:
-      "An AI calendar you talk to in plain language — it schedules, reschedules, and answers questions about your week.",
+      "An AI scheduling assistant you talk to in natural language. It plans, reschedules, and answers questions about your week.",
     highlights: [
-      "The model decides only intent; every date, recurrence rule, and conflict check is computed deterministically server-side and treated as untrusted until validated.",
-      "Two-phase agent: a tool-enabled 'gather' pass (Maps travel times, web search) collects facts, then a JSON pass emits a structured, capped action list.",
-      "Recurring events live as a single RRULE expanded on read; every calendar-changing turn is journaled and reversible with a single undo.",
+      "The model decides intent and controls dates, recurrence rules, and conflict checks.",
+      "Agent sources information including live Google Maps travel times, web search for locations, chat history facts, etc.",
       "Real-time sync across devices over WebSocket, a Google-Calendar-style overlap layout, and on-device embeddings that pick an event's icon with no API call.",
     ],
     tech: ["React", "Redux", "Python", "FastAPI", "PostgreSQL", "Gemini"],
@@ -172,7 +171,8 @@ const projects: Project[] = [
     tagline:
       "A browser music composer built around physics-simulated strings and the Web Audio API.",
     highlights: [
-      "Pluck and couple simulated strings to compose in the browser, with audio synthesized live through the Web Audio API.",
+      "Pluck simulated strings among many other instrumentsto create sounds and music in your browser.",
+      "Audio is synthesized live through the Web Audio API, then stored, downloaded, or shared.",
       "React frontend with a Python / FastAPI backend, deployed on Render.",
     ],
     tech: ["React", "TypeScript", "Python", "FastAPI", "Web Audio"],

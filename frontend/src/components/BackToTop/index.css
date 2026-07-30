@@ -1,0 +1,46 @@
+.to-top {
+    position: fixed;
+    bottom: clamp(1.25rem, 3vh, 2rem);
+    /* Sit just inside the framed body on wide viewports rather than floating
+       out in the empty margin beside it; falls back to a plain inset once the
+       viewport is narrower than the frame. */
+    right: max(1.25rem, calc(50% - var(--maxw) / 2 + 1.25rem));
+    z-index: 40;
+
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+
+    /* hidden by default: visibility keeps it out of the tab order until the
+       reader is far enough down for it to be useful */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.5rem);
+    transition: opacity 0.28s ease, transform 0.28s var(--ease), visibility 0.28s linear,
+        border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.to-top:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.to-top svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    display: block;
+}

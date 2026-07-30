@@ -2,6 +2,7 @@ import "./index.css";
 
 // Components
 import MenuButton from "../../components/MenuButton";
+import BackToTop from "../../components/BackToTop";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
 import Experience from "../../components/Experience";
@@ -66,6 +67,8 @@ const Home = () => {
           );
         })}
       </main>
+
+      <BackToTop />
     </>
   );
 };

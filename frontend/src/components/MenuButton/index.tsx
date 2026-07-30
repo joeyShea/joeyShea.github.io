@@ -71,18 +71,18 @@ const MenuButton = ({ pages }: MenuButtonProps) => {
   }, []);
 
   return (
-    <div
-      className="menu"
-      ref={containerRef}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
+    <div className="menu" ref={containerRef} onMouseLeave={() => setOpen(false)}>
+      {/* Opening is tied to the icon itself, not the container: the collapsed
+          menu still reserves its full height, so a container-level mouseenter
+          would fire from the empty space above and below the hamburger.
+          Closing stays on the container so the cursor can travel to the links. */}
       <button
         type="button"
         className={`hamburger ${open ? "open" : ""}`}
         style={{ "--line-move": lineMove } as React.CSSProperties}
         aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={open}
+        onMouseEnter={() => setOpen(true)}
         onClick={() => setOpen((v) => !v)}
       >
         <span className="line top" />

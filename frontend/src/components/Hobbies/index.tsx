@@ -366,7 +366,7 @@ const Hobbies = () => {
   return (
     <div className="hobbies">
       <p className="hob-lead">
-        When I'm not behind a keyboard I have a few hobbies! I like to get outside and take photos of cool things I see Here are a few of my favorites.
+        When I'm not behind a keyboard I have a few other hobbies! I like to get outside and take photos of cool things I see Here are a few of my favorites.
       </p>
 
       <section className="hob-sub" aria-labelledby="hob-photography">
@@ -467,7 +467,7 @@ const Hobbies = () => {
       <div className="hob-split">
         <section className="hob-sub" aria-labelledby="hob-ceramics">
           <h3 className="hob-sub-title" id="hob-ceramics">Ceramics</h3>
-          <p className="hob-sub-lead">A few pieces off the wheel, glaze experiments included.</p>
+          <p className="hob-sub-lead">An interest of mine I've had for a while.</p>
 
           {/* One button, not a gallery — the fan behind the front piece is
               decorative, so only the front image carries alt text. */}
@@ -502,12 +502,17 @@ const Hobbies = () => {
 
         <section className="hob-sub" aria-labelledby="hob-guitar">
           <h3 className="hob-sub-title" id="hob-guitar">Guitar</h3>
-          {/* Placeholder copy — swap in your own words. */}
-          <p className="hob-sub-lead">Self-taught, six strings, no sheet music.</p>
-          <p className="hob-blurb">
-            I've been playing for a while now. It's the one thing I do where being bad at it
-            is still the whole point.
-          </p>
+          <p className="hob-sub-lead">Self-taught little by little.</p>
+          {/* One grid item, two beats: the split's row-3 placement targets the
+              stack, so the sentences can't land in the same cell. */}
+          <div className="hob-blurb-stack">
+            <p className="hob-blurb">
+              I've been playing acoustic guitar for the last <span className="hl">~3</span> years.
+            </p>
+            <p className="hob-blurb">
+              I have a long way to go but that's part of the fun.
+            </p>
+          </div>
         </section>
       </div>
 

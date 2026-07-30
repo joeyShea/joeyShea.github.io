@@ -59,11 +59,11 @@
 .hob-split > .hob-sub:first-child > .cer-stack { grid-area: 3 / 1; }
 .hob-split > .hob-sub:last-child > .hob-sub-title { grid-area: 1 / 2; }
 .hob-split > .hob-sub:last-child > .hob-sub-lead { grid-area: 2 / 2; }
-.hob-split > .hob-sub:last-child > .hob-blurb { grid-area: 3 / 2; }
+.hob-split > .hob-sub:last-child > .hob-blurb-stack { grid-area: 3 / 2; }
 
-/* body row: the stack and the blurb start level with each other */
+/* body row: the ceramics stack and the guitar copy start level with each other */
 .hob-split .cer-stack,
-.hob-split .hob-blurb {
+.hob-split .hob-blurb-stack {
     margin-top: 0.6rem;
 }
 
@@ -83,6 +83,14 @@
 }
 
 /* ---------- Guitar blurb ---------- */
+/* Sentences read as separate beats, so they get a gap scaled to the display
+   type rather than the flush stacking `p { margin: 0 }` would give. */
+.hob-blurb-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.7rem, 1.6vw, 1.15rem);
+}
+
 .hob-blurb {
     font-size: clamp(1.35rem, 3.2vw, 2.1rem);
     font-weight: 300;
@@ -91,6 +99,12 @@
     color: var(--text);
     max-width: 30ch;
     text-wrap: balance;
+}
+
+/* inline highlight inside a blurb — display-size text, so the brighter
+   accent is the AA-safe choice rather than --accent-link */
+.hob-blurb .hl {
+    color: var(--accent);
 }
 
 /* ---------- Set filters ---------- */
@@ -414,7 +428,7 @@
         grid-area: auto;
     }
     .hob-split .cer-stack,
-    .hob-split .hob-blurb {
+    .hob-split .hob-blurb-stack {
         margin-top: 0;
     }
 }
