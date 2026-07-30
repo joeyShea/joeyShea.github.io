@@ -14,7 +14,14 @@ const Education = () => {
       <div className="edu-card">
         <div className="edu-header">
           <div className="edu-logo">
-            <img src={raikes} alt="Raikes School logo" width={520} height={468} decoding="async" />
+            <img
+              src={raikes}
+              alt="Raikes School logo"
+              width={520}
+              height={468}
+              decoding="async"
+              draggable={false}
+            />
           </div>
           <div className="edu-headings">
             <h3 className="edu-school">University of Nebraska–Lincoln</h3>

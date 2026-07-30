@@ -7,6 +7,7 @@ import Contact from "../../components/Contact";
 import Experience from "../../components/Experience";
 import Education from "../../components/Education";
 import Projects from "../../components/Projects";
+import Hobbies from "../../components/Hobbies";
 import SineWave from "../../components/SineWave";
 
 type SectionDef = {
@@ -21,6 +22,7 @@ const sections: SectionDef[] = [
   { id: "experience", label: "Experience", kicker: "Where I've worked", Component: Experience },
   { id: "projects", label: "Projects", kicker: "What I've built", Component: Projects },
   { id: "education", label: "Education", kicker: "What I study", Component: Education },
+  { id: "hobbies", label: "Hobbies", kicker: "Off the clock", Component: Hobbies },
   { id: "contact", label: "Contact", kicker: "Say hello", Component: Contact },
 ];
 

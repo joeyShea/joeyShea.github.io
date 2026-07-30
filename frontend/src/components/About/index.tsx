@@ -14,6 +14,7 @@ const About = () => {
           width={800}
           height={800}
           decoding="async"
+          draggable={false}
         />
       </div>
 

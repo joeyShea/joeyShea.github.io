@@ -1,15 +1,11 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import {
   FiExternalLink,
   FiGithub,
-  FiX,
   FiArrowUpRight,
-  FiChevronLeft,
   FiChevronRight,
-  FiZoomIn,
-  FiZoomOut,
-  FiMaximize,
 } from "react-icons/fi";
+import ImageViewer from "../ImageViewer";
 import "./index.css";
 
 type ProjectLink = {
@@ -294,10 +290,6 @@ const LINK_ICON = {
 // The deck loads a light 640px thumbnail; the modal loads the full-res original.
 const thumbFor = (src: string) => src.replace(/\.webp$/, "-thumb.webp");
 
-const MIN_ZOOM = 1;
-const MAX_ZOOM = 4;
-const clampZoom = (z: number) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(z * 100) / 100));
-
 /* ------------------------------------------------------------------
    Aside — the detail panel's right rail. Holds the screenshot gallery
    (a fanned deck; hovering a card hops it straight up, no reorder) and
@@ -339,6 +331,7 @@ const ProjectAside = ({
                   decoding="async"
                   width={640}
                   height={400}
+                  draggable={false}
                 />
               </button>
             ))}
@@ -351,7 +344,9 @@ const ProjectAside = ({
         <div className="tech-row proj-skills">
           {tech.map((name) => (
             <span key={name} className="tech-chip">
-              {TECH_ICONS[name] && <img src={TECH_ICONS[name]} alt="" aria-hidden="true" />}
+              {TECH_ICONS[name] && (
+                <img src={TECH_ICONS[name]} alt="" aria-hidden="true" draggable={false} />
+              )}
               {name}
             </span>
           ))}
@@ -360,192 +355,6 @@ const ProjectAside = ({
     </div>
   </aside>
 );
-
-/* ------------------------------------------------------------------
-   Full-screen viewer — arrow navigation, zoom, and drag-to-pan.
-   ------------------------------------------------------------------ */
-const ImageViewer = ({
-  title,
-  images,
-  index,
-  onIndex,
-  onClose,
-}: {
-  title: string;
-  images: string[];
-  index: number;
-  onIndex: (index: number) => void;
-  onClose: () => void;
-}) => {
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
-  const dragStart = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
-  const moved = useRef(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
-
-  const applyZoom = useCallback((next: number) => {
-    const z = clampZoom(next);
-    setZoom(z);
-    if (z === MIN_ZOOM) setPan({ x: 0, y: 0 });
-  }, []);
-
-  const go = useCallback(
-    (delta: number) => onIndex((index + delta + images.length) % images.length),
-    [index, images.length, onIndex]
-  );
-
-  // Reset the transform whenever a different screenshot comes up.
-  useEffect(() => {
-    setZoom(1);
-    setPan({ x: 0, y: 0 });
-  }, [index]);
-
-  // Lock body scroll and wire up keyboard controls while open.
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      else if (e.key === "ArrowRight") go(1);
-      else if (e.key === "ArrowLeft") go(-1);
-      else if (e.key === "+" || e.key === "=") applyZoom(zoom + 0.5);
-      else if (e.key === "-" || e.key === "_") applyZoom(zoom - 0.5);
-      else if (e.key === "0") applyZoom(MIN_ZOOM);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [onClose, go, applyZoom, zoom]);
-
-  const onPointerDown = (e: React.PointerEvent<HTMLImageElement>) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    dragStart.current = { x: e.clientX, y: e.clientY, px: pan.x, py: pan.y };
-    moved.current = false;
-    if (zoom > MIN_ZOOM) setDragging(true);
-  };
-  const onPointerMove = (e: React.PointerEvent<HTMLImageElement>) => {
-    const start = dragStart.current;
-    if (!start) return;
-    const dx = e.clientX - start.x;
-    const dy = e.clientY - start.y;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved.current = true;
-    if (zoom > MIN_ZOOM) setPan({ x: start.px + dx, y: start.py + dy });
-  };
-  const onPointerUp = () => {
-    // a click that didn't drag toggles between fit and 2x
-    if (dragStart.current && !moved.current) applyZoom(zoom > MIN_ZOOM ? MIN_ZOOM : 2);
-    dragStart.current = null;
-    setDragging(false);
-  };
-  const cancelDrag = () => {
-    dragStart.current = null;
-    setDragging(false);
-  };
-
-  const multiple = images.length > 1;
-
-  return (
-    <div
-      className="proj-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${title} screenshot ${index + 1} of ${images.length}`}
-      onClick={onClose}
-      onWheel={(e) => applyZoom(zoom - e.deltaY * 0.0025 * zoom)}
-    >
-      <button
-        type="button"
-        ref={closeRef}
-        className="proj-modal-close"
-        onClick={onClose}
-        aria-label="Close viewer"
-      >
-        <FiX />
-      </button>
-
-      {multiple && (
-        <>
-          <button
-            type="button"
-            className="proj-modal-nav prev"
-            aria-label="Previous screenshot"
-            onClick={(e) => {
-              e.stopPropagation();
-              go(-1);
-            }}
-          >
-            <FiChevronLeft />
-          </button>
-          <button
-            type="button"
-            className="proj-modal-nav next"
-            aria-label="Next screenshot"
-            onClick={(e) => {
-              e.stopPropagation();
-              go(1);
-            }}
-          >
-            <FiChevronRight />
-          </button>
-        </>
-      )}
-
-      <div className="proj-modal-stage">
-        <img
-          key={images[index]}
-          src={images[index]}
-          alt={`${title} screenshot ${index + 1}`}
-          className={`proj-modal-img ${zoom > MIN_ZOOM ? "zoomed" : ""} ${
-            dragging ? "dragging" : ""
-          }`}
-          style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
-          draggable={false}
-          onClick={(e) => e.stopPropagation()}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={cancelDrag}
-        />
-      </div>
-
-      <div className="proj-modal-bar" onClick={(e) => e.stopPropagation()}>
-        {multiple && (
-          <span className="proj-modal-counter">
-            {index + 1} / {images.length}
-          </span>
-        )}
-        <button
-          type="button"
-          onClick={() => applyZoom(zoom - 0.5)}
-          disabled={zoom <= MIN_ZOOM}
-          aria-label="Zoom out"
-        >
-          <FiZoomOut />
-        </button>
-        <span className="proj-modal-zoom">{Math.round(zoom * 100)}%</span>
-        <button
-          type="button"
-          onClick={() => applyZoom(zoom + 0.5)}
-          disabled={zoom >= MAX_ZOOM}
-          aria-label="Zoom in"
-        >
-          <FiZoomIn />
-        </button>
-        <button
-          type="button"
-          onClick={() => applyZoom(MIN_ZOOM)}
-          disabled={zoom === MIN_ZOOM && pan.x === 0 && pan.y === 0}
-          aria-label="Reset zoom"
-        >
-          <FiMaximize />
-        </button>
-      </div>
-    </div>
-  );
-};
 
 const Projects = () => {
   const [selectedId, setSelectedId] = useState<string>(projects[0].id);
@@ -690,8 +499,10 @@ const Projects = () => {
       {/* Full-screen viewer */}
       {viewerIndex !== null && images[viewerIndex] && (
         <ImageViewer
-          title={selected.title}
-          images={images}
+          images={images.map((src, i) => ({
+            src,
+            alt: `${selected.title} screenshot ${i + 1}`,
+          }))}
           index={viewerIndex}
           onIndex={setViewerIndex}
           onClose={closeViewer}

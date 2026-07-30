@@ -109,7 +109,9 @@ const Experience = () => {
               <div className="tech-row exp-tech">
                 {exp.tech.map((name) => (
                   <span key={name} className="tech-chip">
-                    {TECH_ICONS[name] && <img src={TECH_ICONS[name]} alt="" aria-hidden="true" />}
+                    {TECH_ICONS[name] && (
+                      <img src={TECH_ICONS[name]} alt="" aria-hidden="true" draggable={false} />
+                    )}
                     {name}
                   </span>
                 ))}

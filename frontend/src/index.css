@@ -97,8 +97,21 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Photos and logos are never text to be copied — a drag or a double-click on one
+   should do nothing rather than leave a blue selection behind.
+
+   `user-select` only governs selection; peeling an image off the page is native
+   drag-and-drop, which needs `-webkit-user-drag` (Chrome/Safari) and, for the
+   browsers that ignore it, `draggable={false}` on the tag itself. Every <img> in
+   src/ carries that attribute — new ones should too. */
 img {
     max-width: 100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 ::selection {

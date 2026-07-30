@@ -1,0 +1,271 @@
+/* ============================================================
+   Shared full-screen image viewer (Projects gallery + Hobbies photos)
+   ============================================================ */
+.iv-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(4px);
+    /* A column so the stage is constrained on the *cross* axis by the modal's
+       own height — in a row, `flex: 1` only grows the width and a portrait
+       image blows straight past the viewport. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    /* room for the arrows at the sides and the toolbar underneath */
+    padding: clamp(3.25rem, 8vmin, 5rem) clamp(3.75rem, 9vmin, 6rem) clamp(4.75rem, 10vmin, 6.5rem);
+    z-index: 1000;
+    animation: ivFadeIn 0.2s ease;
+}
+@keyframes ivFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Row that holds the photo and (optionally) the metadata rail. `stretch`
+   rather than `center` is deliberate: it hands the figure a definite height
+   to resolve `max-height: 100%` against. */
+.iv-content {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    width: 100%;
+    min-height: 0;
+}
+
+.iv-figure {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    /* clips the image while it's zoomed and panned */
+    overflow: hidden;
+}
+
+.iv-img {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    cursor: zoom-in;
+    touch-action: none;
+    user-select: none;
+    transition: transform 0.18s var(--ease);
+}
+.iv-img.zoomed {
+    cursor: grab;
+}
+.iv-img.dragging {
+    cursor: grabbing;
+    transition: none;
+}
+
+/* round control buttons shared by close / prev / next */
+.iv-close,
+.iv-nav {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s var(--ease);
+}
+.iv-close:hover,
+.iv-nav:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.iv-close {
+    top: max(1.2rem, 3vmin);
+    right: max(1.2rem, 3vmin);
+    z-index: 2;
+}
+.iv-nav {
+    top: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.6rem;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.iv-nav.prev { left: max(0.75rem, 2vmin); }
+.iv-nav.next { right: max(0.75rem, 2vmin); }
+.iv-nav:hover { transform: translateY(-50%) scale(1.06); }
+
+/* ---------- Caption ----------
+   In flow beneath the image, so it never lands on top of the photo. */
+.iv-caption {
+    flex: none;
+    align-self: center;
+    max-width: min(46ch, 100%);
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ---------- Metadata rail ----------
+   Opt-in per caller (`showMeta`) and per image (`meta`). Sits beside the
+   frame like a print's caption card. */
+.iv-meta {
+    flex: 0 0 auto;
+    align-self: center;
+    width: clamp(12rem, 20vw, 15.5rem);
+    /* clears the next-image arrow, so the rail sits between the photo and the
+       arrow rather than tucked under it */
+    margin-right: clamp(0.75rem, 1.5vw, 1.75rem);
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 1.1rem 1.2rem;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-md);
+    backdrop-filter: blur(8px);
+    animation: ivRailIn 0.28s var(--ease);
+}
+@keyframes ivRailIn {
+    from { opacity: 0; transform: translateX(0.75rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.iv-meta-label {
+    color: var(--muted-dim);
+    margin: 0 0 0.9rem;
+}
+
+.iv-meta-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+/* Label stacked over value, spec-sheet style — a two-column row can't take a
+   long value (a full lens name) without wrapping into something ragged. */
+.iv-meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.55rem 0;
+}
+.iv-meta-row + .iv-meta-row {
+    border-top: 1px solid var(--line);
+}
+.iv-meta-row dt {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+}
+.iv-meta-row dd {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.35;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.iv-meta-toggle.on {
+    color: var(--accent);
+}
+
+/* ---------- Toolbar ---------- */
+.iv-bar {
+    position: absolute;
+    bottom: max(1rem, 3vmin);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.5rem;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+}
+.iv-bar button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1.05rem;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+.iv-bar button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+.iv-bar button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+.iv-counter,
+.iv-zoom {
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding: 0 0.5rem;
+    white-space: nowrap;
+}
+.iv-counter {
+    border-right: 1px solid var(--line);
+    margin-right: 0.15rem;
+}
+/* Fixed-width, right-aligned slot for the current index — its `width` comes
+   from the digit count of the set's size (see ImageViewer). Tabular figures
+   make 1ch exactly one digit, so the slot holds any number in the set. */
+.iv-counter-index {
+    display: inline-block;
+    text-align: right;
+}
+.iv-zoom {
+    min-width: 3.4rem;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .iv-nav {
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.3rem;
+    }
+    /* no room for a side rail — stack it under the frame instead */
+    .iv-content {
+        flex-direction: column;
+    }
+    .iv-meta {
+        align-self: stretch;
+        width: 100%;
+        margin-right: 0;
+        max-height: 40%;
+        padding: 0.9rem 1rem;
+    }
+}

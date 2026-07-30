@@ -1,0 +1,448 @@
+.hobbies {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.hob-lead {
+    font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 62ch;
+}
+
+/* ---------- Sub-sections ----------
+   Photography / Ceramics / Guitar sit inside the one Hobbies section, so their
+   headings stay a clear step below the big section title. */
+.hob-sub {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+}
+.hob-sub + .hob-sub {
+    margin-top: clamp(0.75rem, 2vw, 1.5rem);
+    padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+    border-top: 1px solid var(--line);
+}
+
+/* Ceramics + Guitar side by side. The two sections go `display: contents` so
+   their children become the grid's items and can be placed on shared rows —
+   titles on row 1, leads on row 2, bodies on row 3 — which keeps the two
+   columns aligned even when one lead wraps and the other doesn't.
+
+   Placement has to be explicit: `display: contents` preserves DOM order, so
+   each section's children arrive grouped, and auto-placement would fill a
+   column with one section rather than interleaving the two. */
+.hob-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    row-gap: 0.4rem;
+    align-items: start;
+    margin-top: clamp(0.75rem, 2vw, 1.5rem);
+    padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+    border-top: 1px solid var(--line);
+}
+.hob-split > .hob-sub {
+    display: contents;
+}
+/* the row already carries the divider; the sections inside must not */
+.hob-split > .hob-sub + .hob-sub {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.hob-split > .hob-sub:first-child > .hob-sub-title { grid-area: 1 / 1; }
+.hob-split > .hob-sub:first-child > .hob-sub-lead { grid-area: 2 / 1; }
+.hob-split > .hob-sub:first-child > .cer-stack { grid-area: 3 / 1; }
+.hob-split > .hob-sub:last-child > .hob-sub-title { grid-area: 1 / 2; }
+.hob-split > .hob-sub:last-child > .hob-sub-lead { grid-area: 2 / 2; }
+.hob-split > .hob-sub:last-child > .hob-blurb { grid-area: 3 / 2; }
+
+/* body row: the stack and the blurb start level with each other */
+.hob-split .cer-stack,
+.hob-split .hob-blurb {
+    margin-top: 0.6rem;
+}
+
+.hob-sub-title {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+}
+
+.hob-sub-lead {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 58ch;
+    margin-top: -0.3rem;
+}
+
+/* ---------- Guitar blurb ---------- */
+.hob-blurb {
+    font-size: clamp(1.35rem, 3.2vw, 2.1rem);
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    max-width: 30ch;
+    text-wrap: balance;
+}
+
+/* ---------- Set filters ---------- */
+.hob-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.hob-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.34rem 0.75rem;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+.hob-filter:hover {
+    color: var(--text);
+    border-color: var(--line-strong);
+    background: var(--surface-2);
+}
+.hob-filter.active {
+    color: var(--heading);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.hob-filter-count {
+    font-size: 0.68rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted-dim);
+}
+.hob-filter.active .hob-filter-count {
+    color: var(--accent-link);
+}
+
+/* ---------- The wall ----------
+   A contact sheet: even square frames. Mixed orientations crop to the tile
+   here and open uncropped in the viewer, which keeps the block tidy instead
+   of leaving the ragged gaps a masonry would.
+
+   Flex rather than grid, with every tile pinned to an exact 1/--cols share:
+   full rows still sit flush to both edges, but a row that doesn't fill gets
+   *centred* instead of stranding its tiles at the left. That keeps any number
+   of photos looking deliberate — 10 across 3 columns would otherwise leave one
+   lone tile hanging. --cols is the only thing the breakpoints touch. */
+.hob-wall {
+    --cols: 5;
+    --wall-gap: 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--wall-gap);
+}
+
+.hob-shot {
+    position: relative;
+    display: block;
+    flex: 0 0 calc((100% - (var(--cols) - 1) * var(--wall-gap)) / var(--cols));
+    aspect-ratio: 1;
+    padding: 0;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    cursor: zoom-in;
+    transition: transform 0.24s var(--ease), border-color 0.2s ease, box-shadow 0.24s var(--ease);
+}
+
+.hob-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* the wall reads as one muted set; a frame comes to life on hover */
+    filter: saturate(0.7) brightness(0.9);
+    transition: filter 0.28s ease, transform 0.4s var(--ease);
+}
+
+.hob-shot:hover,
+.hob-shot:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
+}
+.hob-shot:hover img,
+.hob-shot:focus-visible img {
+    filter: none;
+    transform: scale(1.03);
+}
+
+/* Title + set ride in from the bottom edge on hover, over a soft scrim. */
+.hob-shot-label {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 1.7rem 0.7rem 0.6rem;
+    text-align: left;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0));
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 0.22s ease, transform 0.28s var(--ease);
+}
+.hob-shot:hover .hob-shot-label,
+.hob-shot:focus-visible .hob-shot-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+.hob-shot-title {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+.hob-shot-set {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+/* ---------- Pager ---------- */
+.hob-pager {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.hob-page,
+.hob-page-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.9rem;
+    height: 1.9rem;
+    padding: 0 0.4rem;
+    font: inherit;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xs);
+    cursor: pointer;
+    transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+.hob-page:hover:not(.active),
+.hob-page-arrow:hover:not(:disabled) {
+    color: var(--text);
+    border-color: var(--line-strong);
+    background: var(--surface-2);
+}
+.hob-page.active {
+    color: var(--heading);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 500;
+}
+.hob-page-arrow {
+    font-size: 0.95rem;
+}
+.hob-page-arrow:disabled {
+    opacity: 0.32;
+    cursor: default;
+}
+
+/* ---------- Ceramics stack ----------
+   One clickable unit: the front piece with three fanned out behind it. The
+   whole thing hovers and lifts together rather than as separate cards.
+   Margins reserve the room the rotated cards bleed into. */
+.cer-stack {
+    --fan: 1;
+    position: relative;
+    display: block;
+    width: min(15.5rem, 62%);
+    aspect-ratio: 3 / 4;
+    /* room for the fanned cards to bleed outside the front one */
+    margin: 1rem 4.5rem 2.25rem 3.5rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.cer-card {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+    transition: transform 0.34s var(--ease), box-shadow 0.3s var(--ease);
+}
+.cer-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* the ones behind sit back a little in tone as well as in space */
+.cer-back img {
+    filter: brightness(0.72) saturate(0.8);
+}
+/* Scaled slightly down as well as rotated out, so they read as sitting behind
+   rather than as a second pile of equal cards.
+
+   One --fan multiplier drives the whole spread: hover widens it, and narrow
+   screens tighten it so the outermost card can't reach the viewport edge. */
+.cer-back-1 {
+    z-index: 1;
+    transform: rotate(calc(-14deg * var(--fan))) translate(calc(-19% * var(--fan)), 0) scale(0.94);
+}
+.cer-back-2 {
+    z-index: 2;
+    transform: rotate(calc(12deg * var(--fan))) translate(calc(19% * var(--fan)), 3%) scale(0.94);
+}
+.cer-back-3 {
+    z-index: 3;
+    transform: rotate(calc(-5.5deg * var(--fan))) translate(calc(-7% * var(--fan)), 6%) scale(0.97);
+}
+.cer-front {
+    z-index: 4;
+}
+
+.cer-stack:hover,
+.cer-stack:focus-visible {
+    --fan: 1.4;
+}
+.cer-stack:hover .cer-front,
+.cer-stack:focus-visible .cer-front {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.62);
+}
+
+/* always-visible affordance — the stack isn't obviously a button otherwise */
+.cer-cue {
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+}
+.cer-cue svg {
+    font-size: 0.9em;
+}
+
+/* ---------- Footnotes ---------- */
+.hob-notes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.4rem;
+}
+.hob-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.8rem;
+    color: var(--muted-dim);
+}
+.hob-note svg {
+    font-size: 1em;
+    flex: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+    .hob-wall {
+        --cols: 4;
+    }
+}
+
+@media (max-width: 760px) {
+    .hob-wall {
+        --cols: 3;
+        --wall-gap: 0.5rem;
+    }
+
+    /* Too narrow for two columns. Back to normal flow — `display: contents`
+       would interleave the two sections' children in a single column. */
+    .hob-split {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0;
+    }
+    .hob-split > .hob-sub {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(0.9rem, 2vw, 1.25rem);
+    }
+    .hob-split > .hob-sub + .hob-sub {
+        margin-top: clamp(0.75rem, 2vw, 1.5rem);
+        padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+        border-top: 1px solid var(--line);
+    }
+    /* clear the two-column placement so normal flow applies */
+    .hob-split > .hob-sub > * {
+        grid-area: auto;
+    }
+    .hob-split .cer-stack,
+    .hob-split .hob-blurb {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hob-wall {
+        --cols: 2;
+    }
+    /* tighter fan + narrower card, so the outermost one stays off the edge */
+    .cer-stack {
+        --fan: 0.65;
+        width: min(13rem, 56%);
+        margin: 1rem 3rem 2rem 2.75rem;
+    }
+    .cer-stack:hover,
+    .cer-stack:focus-visible {
+        --fan: 0.9;
+    }
+}
+
+/* Touch devices never hover, so keep the frames at full colour and
+   the titles permanently legible. */
+@media (hover: none) {
+    .hob-shot img {
+        filter: none;
+    }
+    .hob-shot-title {
+        opacity: 1;
+        transform: none;
+    }
+}
