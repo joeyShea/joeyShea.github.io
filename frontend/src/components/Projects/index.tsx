@@ -197,7 +197,7 @@ const projects: Project[] = [
       "Built with Tauri + React; scripts Adobe InDesign via AppleScript to render the final document and PDF.",
     ],
     tech: ["Tauri", "Rust", "React", "TypeScript"],
-    images: ["/project_images/composites.webp"],
+    images: ["/project_images/composites.png"],
   },
   {
     id: "stocks",
